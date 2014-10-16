@@ -1,6 +1,6 @@
 CREATE TABLE StudyGroup(
 	gid INTEGER NOT NULL PRIMARY KEY,
-	name VARCHAR(20) NOT NULL,
+	name VARCHAR(50) NOT NULL,
 	accessibility VARCHAR(7) NOT NULL
 		CHECK(accessibility = 'private' OR accessibility = 'open')
 );
@@ -12,6 +12,12 @@ CREATE TABLE Person(
 	email VARCHAR(30) NOT NULL
 );
 
+CREATE TABLE PersonAdminOfGroup(
+	pid INTEGER NOT NULL REFERENCES Person(pid),
+	gid INTEGER NOT NULL REFERENCES StudyGroup(gid),
+	PRIMARY KEY(pid,gid)
+);
+
 CREATE TABLE GroupJoinRequest(
 	rid INTEGER NOT NULL PRIMARY KEY,
 	requesting_person_id INTEGER NOT NULL REFERENCES Person(pid),
@@ -20,6 +26,8 @@ CREATE TABLE GroupJoinRequest(
 		CHECK(status = 'new' OR status = 'approved' OR status = 'denied'),
 	time_sent TIMESTAMP NOT NULL,
 	time_answered TIMESTAMP,
+	answering_admin INTEGER REFERENCES Person(pid)
+		CHECK(EXISTS(SELECT * FROM PersonAdminOfGroup WHERE pid = answering_admin AND gid = requested_group_id)),
 	message VARCHAR(300),
 	CHECK((status = 'new' AND time_answered IS NULL) OR (status <> 'new' AND time_answered IS NOT NULL))
 );
@@ -32,9 +40,15 @@ CREATE TABLE Event(
 	description VARCHAR(300)
 );
 
+CREATE TABLE PersonAdminOfEvent(
+	pid INTEGER NOT NULL REFERENCES Person(pid),
+	eid INTEGER NOT NULL REFERENCES Event(eid),
+	PRIMARY KEY(pid,eid),
+);
+
 CREATE TABLE Thread(
 	tid INTEGER NOT NULL PRIMARY KEY,
-	title VARCHAR(30) NOT NULL	
+	title VARCHAR(100) NOT NULL	
 );
 
 CREATE TABLE Post(
@@ -71,7 +85,4 @@ CREATE TABLE EventTaggedWithGroup(
 	gid INTEGER NOT NULL REFERENCES StudyGroup(gid),
 	PRIMARY KEY(eid,gid)
 );
-
-
-
 
