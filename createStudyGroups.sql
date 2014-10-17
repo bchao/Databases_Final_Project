@@ -14,6 +14,8 @@ CREATE TABLE Person(
 CREATE TABLE Request(
 	rid INTEGER NOT NULL PRIMARY KEY,
 	pid INTEGER NOT NULL REFERENCES Person(pid),
+	tid INTEGER NOT NULL REFERENCES Topic(tid),
+	time TIMESTAMP NOT NULL,
 	status VARCHAR(9) NOT NULL
 		CHECK(status = 'matched' OR status = 'unmatched'),
 	
@@ -30,7 +32,7 @@ CREATE TABLE RequestTimes(
 	PRIMARY KEY(rid,tid)
 );
 
-CREATE TABLE StudyGroup(
+CREATE TABLE Meeting(
 	gid INTEGER NOT NULL PRIMARY KEY,
 	topic INTEGER NOT NULL REFERENCES Topic(tid),
 	meeting_time INTEGER NOT NULL REFERENCES TimeSlot(tid)

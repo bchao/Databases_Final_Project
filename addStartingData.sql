@@ -52,7 +52,7 @@ INSERT INTO RequestTimes VALUES
   (6,7),
   (6,8);
 
-INSERT INTO StudyGroup VALUES
+INSERT INTO Meeting VALUES
   (1,1,3),
   (2,2,6);
 
