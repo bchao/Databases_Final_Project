@@ -8,4 +8,4 @@ psql studybuddies -af addStartingData.sql
 
 Finally in order to run the test SQL queries, run:
 
-psql studybuddies -af TEST-SAMPLE.sql &> TEST-OUT.txt
+psql studybuddies -af TEST-SAMPLE.SQL &> TEST-SAMPLE.OUT
