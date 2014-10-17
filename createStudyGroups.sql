@@ -40,7 +40,7 @@ CREATE TABLE Meeting(
 
 CREATE TABLE PersonAttendingMeeting(
 	pid INTEGER NOT NULL REFERENCES Person(pid),
-	mid INTEGER NOT NULL REFERENCES StudyGroup(mid),
+	mid INTEGER NOT NULL REFERENCES Meeting(mid),
 	PRIMARY KEY(pid,gid)
 );
 
