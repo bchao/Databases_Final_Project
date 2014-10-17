@@ -17,7 +17,8 @@ CREATE TABLE Request(
 	tid INTEGER NOT NULL REFERENCES Topic(tid),
 	time TIMESTAMP NOT NULL,
 	status VARCHAR(9) NOT NULL
-		CHECK(status = 'open' OR status = 'closed'),
+		CHECK(status = 'open' OR status = 'closed')
+);
 	
 CREATE TABLE TimeSlot(
 	tid INTEGER NOT NULL PRIMARY KEY,
