@@ -33,14 +33,14 @@ CREATE TABLE RequestTimes(
 );
 
 CREATE TABLE Meeting(
-	gid INTEGER NOT NULL PRIMARY KEY,
+	mid INTEGER NOT NULL PRIMARY KEY,
 	topic INTEGER NOT NULL REFERENCES Topic(tid),
 	meeting_time INTEGER NOT NULL REFERENCES TimeSlot(tid)
 );
 
-CREATE TABLE PersonMemberOfStudyGroup(
+CREATE TABLE PersonAttendingMeeting(
 	pid INTEGER NOT NULL REFERENCES Person(pid),
-	gid INTEGER NOT NULL REFERENCES StudyGroup(gid),
+	mid INTEGER NOT NULL REFERENCES StudyGroup(mid),
 	PRIMARY KEY(pid,gid)
 );
 

@@ -56,7 +56,7 @@ INSERT INTO Meeting VALUES
   (1,1,3),
   (2,2,6);
 
-INSERT INTO PersonMemberOfStudyGroup VALUES
+INSERT INTO PersonAttendingMeeting VALUES
   (1,1),
   (2,1),
   (3,1),
