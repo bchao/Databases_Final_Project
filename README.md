@@ -1,3 +1,6 @@
+In order to view webpage, go to 
+http://thnbgr.com/db/index.php
+
 In order to create the database, run:
 
 dropdb studybuddies; createdb studybuddies; psql studybuddies -af createStudyGroups.sql
