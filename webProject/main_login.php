@@ -30,7 +30,13 @@
 	<tr>
 		<form name="form2" method="post" action="newuser.php">
 			<td>
-				
+				<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
+					<tr>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td><input type="submit" name="newUser" value="Create New User"></td>
+					</tr>
+				</table>
 			</td>
 		</form>
 	</tr>
