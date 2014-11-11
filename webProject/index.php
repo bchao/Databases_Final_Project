@@ -16,7 +16,7 @@
 				password VARCHAR(20) NOT NULL default '',
 				email VARCHAR(30) NOT NULL)") or die(mysql_error());
 
-			mysql_query("INSERT INTO members VALUES(1, 'peter', 'yom', 'password', 'ypeter999@gmail.com')") or die(mysql_error());
+			mysql_query("INSERT INTO members VALUES(1, 'peter', 'yom', 'password', 'ypeter999')") or die(mysql_error());
 
 		?>
 		<!-- user login -->

@@ -26,4 +26,12 @@
 			</td>
 		</form>
 	</tr>
+
+	<tr>
+		<form name="form2" method="post" action="newuser.php">
+			<td>
+				
+			</td>
+		</form>
+	</tr>
 </table>
