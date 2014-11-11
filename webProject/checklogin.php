@@ -21,10 +21,13 @@
 	$mypassword = mysql_real_escape_string($mypassword);
 	var_dump($myemail);
 	var_dump($mypassword);
+	echo "   result   ";
 	$result=mysql_query("SELECT * FROM Person WHERE email='$myemail' and password='$mypassword'") or die("cannot get result");
 
 	// Mysql_num_row is counting table row
 	$count=mysql_num_rows($result);
+
+	var_dump($count);
 
 	// If result matched $myemail and $mypassword, table row must be 1 row
 	if($count==1){
@@ -34,6 +37,6 @@
 		header("location:login_success.php");
 	}
 	else {
-		echo "Wrong Email or Password";
+		echo "Wrong Email or Password!!!!";
 	}
 ?>

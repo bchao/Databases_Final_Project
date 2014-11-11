@@ -7,7 +7,6 @@
 			//selects the database
 			mysql_select_db("thnbgr_db") or die(mysql_error());
 
-
 			mysql_query("drop table members");
 			
 			mysql_query("CREATE TABLE members(
@@ -16,6 +15,7 @@
 				last_name VARCHAR(20) NOT NULL,
 				password VARCHAR(20) NOT NULL default '',
 				email VARCHAR(30) NOT NULL)") or die(mysql_error());
+
 			mysql_query("INSERT INTO members VALUES(1, 'peter', 'yom', 'password', 'ypeter999@gmail.com')") or die(mysql_error());
 
 		?>
@@ -49,7 +49,7 @@
 			</tr>
 		</table>
 		<?php
-		/*
+		
 			//connects me to site/database
 			mysql_connect("localhost", "thnbgr_admin", "Database101") or die(mysql_error());
 
@@ -118,7 +118,7 @@
 			mysql_query("drop table example");
 
 			echo "success";
-			*/
+			
 		?>
 	</b>
 </html>
