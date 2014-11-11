@@ -10,8 +10,8 @@
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 	// email and password sent from form 
-	$myemail=$_POST['email']; 
-	$mypassword=$_POST['password']; 
+	$myemail=$_POST['email'];
+	$mypassword=$_POST['password'];
 
 	// To protect MySQL injection (more detail about MySQL injection)
 	$myemail = stripslashes($myemail);

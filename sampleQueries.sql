@@ -6,3 +6,5 @@ SELECT first_name, last_name, email FROM Person WHERE pid IN (SELECT pid FROM Pe
 
 --List all scheduled sessions with userID '6'
 SELECT * FROM Meeting WHERE id IN (SELECT mid from PersonAttendingMeeting WHERE pid = 6)
+
+--List all requests with same topic and times
