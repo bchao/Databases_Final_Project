@@ -55,7 +55,18 @@
 							        <option>2016</option><option>2017</option>
 							    </select>
 							</td>
-						</tr>					
+						</tr>
+						<tr>
+							<td>Group Preferece</td>
+							<td>:</td>
+							<td>
+								<select name="group">
+									<option>small_group_ok</option>
+									<option>medium_group_ok</option>
+									<option>large_group_ok</option>
+								</select>
+							</td>
+						</tr>
 						<tr>
 							<td>Time</td>
 							<td>:</td>

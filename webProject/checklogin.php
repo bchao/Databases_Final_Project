@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	$host="localhost"; // Host name 
 	$username="thnbgr_admin"; // Mysql email 
 	$password="Database101"; // Mysql password 
@@ -25,13 +27,9 @@
 
 	// If result matched $myemail and $mypassword, table row must be 1 row
 	if($count==1){
-		session_start();
-		$result = mysql_query("SELECT first_name FROM `Person` WHERE email = '$myemail'");
 		$row = mysql_fetch_array($result);
 		$_SESSION['userID'] = $row['pid'];
 		$_SESSION['useremail'] = $myemail;
-		// session_register("myemail");
-		// session_register("mypassword"); 
 		header("location:login_success.php");
 	}
 	else {

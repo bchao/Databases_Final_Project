@@ -15,8 +15,12 @@
 	echo $mypid;
 	$mytopic=$_POST['topic'];
 	echo $mytopic;
-	// $mytid = mysql_query("SELECT topid FROM Topic WHERE name='$mytopic'");
+	$month = $_POST['month'];
+	$day = $_POST['day'];
+	$year = $_POST['year'];
+	$mydate = $month . $day . $year;
+	echo $mydate;
 	$mytime=$_POST['time'];
 	echo $mytime;
-	// mysql_query("INSERT INTO Table REQUEST VALUE(1, '$mypid', '$mytid', '$mytime', 'open')") or die(mysql_error());
+	mysql_query("INSERT INTO Table REQUEST VALUE(1, '$mypid', '$mytid', '$mytime', 'open')") or die(mysql_error());
 ?>
