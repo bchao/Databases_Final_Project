@@ -18,7 +18,7 @@
 
 		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
 		$topics = array();
-		while($line = mysql_fetch_row($topics_query){
+		while($line = mysql_fetch_row($topics_query)){
 			$topics[] = $line[0];
 		}
 		foreach($topics as $topic){

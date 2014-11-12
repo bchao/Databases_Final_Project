@@ -1,7 +1,7 @@
 INSERT INTO Topic VALUES
-  (1,'Compsci 316 final Preparation', 'Studying for the Compsci316 final.'),
-  (2,'Econ 101 Homework', 'Working on homework for Econ 101.'),
-  (3,'Studying for the MCAT', NULL);
+  (1,'Math', 'Studying for the math final.'),
+  (2,'History', 'Learning some history.'),
+  (3,'Art', NULL);
 
 INSERT INTO Person VALUES
   (1,'Leonard','Walworth','lenny@gmail.com'),
@@ -36,11 +36,11 @@ INSERT INTO Person VALUES
   (31,'Kate','Horahan','katie105@gmail.com');
 
 INSERT INTO Request VALUES
-  (1,1,1,'2014-10-11 10:23:54','closed'),
-  (2,2,1,'2014-10-11 16:27:34','closed'),
-  (3,3,1,'2014-10-15 09:13:11','closed'),
-  (4,4,2,'2014-10-24 11:30:01','closed'),
-  (5,5,2,'2014-10-13 15:09:08','closed'),
+  (1,1,1,'2014-10-11 10:23:54','open'),
+  (2,2,1,'2014-10-11 16:27:34','open'),
+  (3,3,1,'2014-10-15 09:13:11','open'),
+  (4,4,2,'2014-10-24 11:30:01','open'),
+  (5,5,2,'2014-10-13 15:09:08','open'),
   (6,6,3,'2014-10-05 15:00:00','open');
 
 INSERT INTO TimeSlot VALUES

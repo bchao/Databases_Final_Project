@@ -19,7 +19,7 @@ CREATE TABLE Request(
 	large_group_ok BOOLEAN NOT NULL,
 	medium_group_ok BOOLEAN NOT NULL,
 	small_group_ok BOOLEAN NOT NULL,
-	time VARCHAR(20) NOT NULL,
+	time INTEGER NOT NULL,
 	status VARCHAR(9) NOT NULL
 		CHECK(status = 'open' OR status = 'closed'),
 	KEY(pid,topid)
