@@ -13,7 +13,6 @@
 		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
 		$topics = array();
 
-
 		//set sizes of groups
 		$GROUP_SIZES = array('large','medium','small');
 
@@ -33,11 +32,11 @@
 		$MIN_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 11);
 		$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
 
-		echo 'test2';
+		//echo 'test2';
 
 		$made_update = true;
 		while ($made_update){
-			echo 'test3';
+			//echo 'test3';
 			$top_time_slot = 'hello';
 			switch($group_size){
 				case 'small':
@@ -49,12 +48,12 @@
 				default:
 					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 			}
-			echo $top_time_slot;
+			//echo $top_time_slot;
 			if($top_time_slot != 0){
 				$meeting = mysql_fetch_array($top_time_slot);
 
-				echo 'hello';
-				echo $meeting['num_people'];
+				//echo 'hello';
+				//echo $meeting['num_people'];
 				if ($meeting['num_people'] >= $MIN_GROUP_SIZE[$group_size]){
 					$tsid = $meeting['tsid'];
 					switch($group_size){
