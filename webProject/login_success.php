@@ -8,5 +8,9 @@
 <html>
 	<body>
 		Login Successful
+		<form action="makeRequest.php" method="post"> 
+		    <input type="submit" />
+
+		</form>		
 	</body>
 </html>
