@@ -6,12 +6,12 @@ if (isset($_POST['Submit'])) {
 	//selects the database
 	mysql_select_db("thnbgr_db") or die(mysql_error());
 
-	mysql_query("INSERT INTO members VALUES($_POST[id], 
+	mysql_query("INSERT INTO Person VALUES($_POST[id], 
 		'$_POST[firstname]', 
 		'$_POST[lastname]', 
 		'$_POST[password]', 
 		'$_POST[email]')") or die("Could not create new user");
-	
+
 		header("location:main_login.php");
 } else {
 ?>
