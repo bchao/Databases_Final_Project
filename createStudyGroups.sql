@@ -8,7 +8,7 @@ CREATE TABLE Person(
 	pid INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	first_name VARCHAR(20) NOT NULL,
 	last_name VARCHAR(20) NOT NULL,
-	password VARCHAR(20) NOT NULL default '',
+	password VARCHAR(20) NOT NULL DEFAULT '',
 	email VARCHAR(30) NOT NULL
 );
 
