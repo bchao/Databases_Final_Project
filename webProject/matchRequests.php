@@ -9,36 +9,65 @@
 	$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
 	$GROUP_SIZES = array('large','medium','small');
 
-        // Connect to server and select database.
-        mysql_connect("$host", "$username", "$password")or die(mysql_error());
-        mysql_select_db("$db_name")or die("cannot select DB");
-
-
 
 	function matchRequests(){
-		$topics = mysql_query("SELECT DISTINCT topid FROM Topic;");
+        	// Connect to server and select database.
+        	mysql_connect("$host", "$username", "$password")or die(mysql_error());
+        	mysql_select_db("$db_name")or die("cannot select DB");
+
+
+		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
+		$topics = array();
+		while($line = mysql_fetch_row($topics_query){
+			$topics[] = $line[0];
+		}
+		foreach($topics as $topic){
+			foreach($GROUP_SIZES as $group_size){
+				matchRequestsForTopicAndSize($topic,$group_size);
+			}
+		}
 	}
 
 
-	//matches up requests for specified topic
-	function matchRequestsForTopic($topic, $group_size){
-
-		//$time_slots_per_person = mysql_query("SELECT (pid,") or die("cannot find time slots");
+	//matches up requests for specified topic and size
+	function matchRequestsForTopicAndSize($topic, $group_size){
 
 		$made_update = true;
 		while ($made_update){
 			switch($group_size){
 				case 'small':
-				$top_time_slot = mysql_fetch_row(mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;"));
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
 					break;
 				case 'medium':
-				$top_time_slot = mysql_fetch_row(mysql_query("SELECT TOP 1 * FROM MediumRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;"));
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM MediumRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
 					break;
 				default:
-				$top_time_slot = mysql_fetch_row(mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;"));
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
 			}
 			if(mysql_num_rows($top_time_slot) > 0){
-				ADD STUFF HEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE	
+				$meeting = mysql_fetch_array($top_time_slot);
+				if ($meeting['num_people'] >= $MIN_GROUP_SIZE[$group_size]){
+					switch($group_size){
+						case 'small':	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+							break;
+						case 'medium':
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+							break;
+						default:
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+					}
+					$people = array();
+					$count = 0;
+					while($line = mysql_fetch_row($people_query) and $count < $MAX_GROUP_SIZE[$group_size]){
+						$people[] = $line[0];
+						$count = $count + 1;
+					}
+					makeMeeting($people, $topic, $meeting['tsid']);
+				}
+				else{
+					$made_update = false;
+				}
 			}
 			else{
 				$made_update = false;
