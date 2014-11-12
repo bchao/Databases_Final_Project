@@ -58,13 +58,13 @@
 					$tsid = $meeting['tsid'];
 					switch($group_size){
 						case 'small':	
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid' AND status = 'open');");	
 							break;
 						case 'medium':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid' AND status = 'open');");	
 							break;
 						default:
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid' AND status = 'open');");	
 					}
 					$people = array();
 					$count = 0;
