@@ -57,14 +57,12 @@ WHERE (Request.rid = RequestTimes.rid AND large_group_ok = TRUE)
 GROUP BY (topid, tsid)
 ORDER BY num_people DESC;
 
-
 CREATE VIEW MediumRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
 WHERE (Request.rid = RequestTimes.rid AND medium_group_ok = TRUE)
 GROUP BY (topid, tsid)
 ORDER BY num_people DESC;
-
 
 CREATE VIEW SmallRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
