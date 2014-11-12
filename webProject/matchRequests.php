@@ -49,7 +49,7 @@
 					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 			}
 			//echo $top_time_slot;
-			if($top_time_slot != 0){
+			if($top_time_slot != 0 and mysql_num_rows($top_time_slot) > 0){
 				$meeting = mysql_fetch_array($top_time_slot);
 
 				//echo 'hello';
