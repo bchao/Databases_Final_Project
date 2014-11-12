@@ -4,7 +4,7 @@
 	$password="Database101"; // Mysql password 
 	$db_name="thnbgr_db"; // Database name 
 
-	// Connect to server and select databse.
+	// Connect to server and select database.
 	mysql_connect("$host", "$username", "$password")or die(mysql_error()); 
 	mysql_select_db("$db_name")or die("cannot select DB");
 
