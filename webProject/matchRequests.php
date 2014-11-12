@@ -9,6 +9,7 @@
 	$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
 	$GROUP_SIZES = array('large','medium','small');
 
+	matchRequests();
 
 	function matchRequests(){
         	// Connect to server and select database.
@@ -18,7 +19,7 @@
 
 		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
 		$topics = array();
-		while($line = mysql_fetch_row($topics_query){
+		while($line = mysql_fetch_row($topics_query)){
 			$topics[] = $line[0];
 		}
 		foreach($topics as $topic){
@@ -47,15 +48,16 @@
 			if(mysql_num_rows($top_time_slot) > 0){
 				$meeting = mysql_fetch_array($top_time_slot);
 				if ($meeting['num_people'] >= $MIN_GROUP_SIZE[$group_size]){
+					$tsid = $meeting['tsid'];
 					switch($group_size){
 						case 'small':	
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
 							break;
 						case 'medium':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
 							break;
 						default:
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $meeting['tsid']);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
 					}
 					$people = array();
 					$count = 0;
