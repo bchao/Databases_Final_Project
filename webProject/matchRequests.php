@@ -37,13 +37,13 @@
 		while ($made_update){
 			switch($group_size){
 				case 'small':
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 					break;
 				case 'medium':
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM MediumRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM MediumRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 					break;
 				default:
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = $topic) ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 			}
 			if(mysql_num_rows($top_time_slot) > 0){
 				$meeting = mysql_fetch_array($top_time_slot);
@@ -51,13 +51,13 @@
 					$tsid = $meeting['tsid'];
 					switch($group_size){
 						case 'small':	
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
 							break;
 						case 'medium':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
 							break;
 						default:
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid);");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = '$topic' AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = '$tsid');");	
 					}
 					$people = array();
 					$count = 0;
@@ -82,14 +82,14 @@
 	//takes an array of people's ids to be added, a topic id, and a time slot it
 	//creates a meeting for them with the specified time and topic, adds them to PersonAttendingMeeting, and updates their requests
 	function makeMeeting($people, $topic, $time_slot){
-		mysql_query("INSERT INTO Meeting (topic,meeting_time) VALUES ($topic,$time_slot);") or die("cannot create meeting");
+		mysql_query("INSERT INTO Meeting (topic,meeting_time) VALUES ('$topic','$time_slot');") or die("cannot create meeting");
 
 		//mid is number of elements now in Meeting
 		$mid = mysql_num_rows(mysql_query("SELECT * FROM MEETING;")) or die("cannot get meeting id");
 		
 		foreach($people as $person){
-			mysql_query("INSERT INTO PersonAttendingMeeting VALUES ($mid,$person);") or die("cannot add to PersonAttendingMeeting");
-			mysql_query("UPDATE Request SET status = 'closed' WHERE (pid = $person AND topid = $topic);") or die("cannot update Request");
+			mysql_query("INSERT INTO PersonAttendingMeeting VALUES ('$mid','$person');") or die("cannot add to PersonAttendingMeeting");
+			mysql_query("UPDATE Request SET status = 'closed' WHERE (pid = '$person' AND topid = '$topic');") or die("cannot update Request");
 		}
 	}
 ?>
