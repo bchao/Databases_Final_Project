@@ -1,7 +1,7 @@
 INSERT INTO Topic VALUES
-  (1,'Compsci 316 final Preparation', 'Studying for the Compsci316 final.'),
-  (2,'Econ 101 Homework', 'Working on homework for Econ 101.'),
-  (3,'Studying for the MCAT', NULL);
+  (1,'Math', 'Studying for the math final.'),
+  (2,'History', 'Learning some history.'),
+  (3,'Art', NULL);
 
 INSERT INTO Person VALUES
   (1,'Leonard','Walworth','lenny@gmail.com'),
@@ -67,9 +67,6 @@ INSERT INTO Request VALUES
   (29,29,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
   (30,30,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
   (31,31,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
-
-
-
 
 
 INSERT INTO TimeSlot VALUES

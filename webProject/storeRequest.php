@@ -27,7 +27,8 @@
 	// echo $mydate;
 
 	$mytime=$_POST['time'];
-	// echo $mytime;
+	$curtime = time();
+	$tsid = mysql_query("SELECT tsid FROM TimeSlot WHERE time_slot_date='$mydate' AND time_slot_time='$mytime'");
 
 	$groupSize = $_POST['group'];
 	if(strcmp($groupSize, "small group") == 0) {
@@ -46,7 +47,10 @@
 		$large = true;
 	}
 
-	mysql_query("INSERT INTO Request VALUE('', '$mypid', '$mytopid', '$large', '$med', '$small', '$mytime', 'open')") or die(mysql_error());
+	mysql_query("INSERT INTO Request VALUE('', '$mypid', '$mytopid', '$large', '$med', '$small', '$curtime', 'open')") or die(mysql_error());
+
+	$rid = mysql_num_rows(mysql_query("SELECT * FROM Request;")) or die("cannot get request id");
+	mysql_query("INSERT INTO RequestTimes VALUE('$rid', '$tsid')") or die(mysql_error());
 
 	echo "Request made!";
 ?>
