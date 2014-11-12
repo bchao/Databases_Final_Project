@@ -57,7 +57,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Group Preferece</td>
+							<td>Group Preference</td>
 							<td>:</td>
 							<td>
 								<select name="group">
@@ -89,5 +89,4 @@
 			</form>
 		</tr>
 	</table>
-
 </html>
