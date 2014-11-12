@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	$host="localhost"; // Host name 
 	$username="thnbgr_admin"; // Mysql email 
 	$password="Database101"; // Mysql password 
@@ -9,16 +11,12 @@
 	mysql_select_db("$db_name")or die("cannot select DB");
 
 	// email and password sent from form 
-	$mytopic=$_POST['topic']; 
+	$mypid = $_SESSION['userID'];
+	echo $mypid;
+	$mytopic=$_POST['topic'];
+	echo $mytopic;
+	// $mytid = mysql_query("SELECT topid FROM Topic WHERE name='$mytopic'");
 	$mytime=$_POST['time'];
-
-	// grab user name and pid from login
-	$myuser=
-	// create unique request id 
-	$myrid=
-
-	mysql_query("INSERT INTO Table REQUEST") or die(mysql_error());
-
-	header("location:login_success.php");
-
+	echo $mytime;
+	// mysql_query("INSERT INTO Table REQUEST VALUE(1, '$mypid', '$mytid', '$mytime', 'open')") or die(mysql_error());
 ?>

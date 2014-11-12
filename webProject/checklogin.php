@@ -25,9 +25,13 @@
 
 	// If result matched $myemail and $mypassword, table row must be 1 row
 	if($count==1){
-		// Register $myemail, $mypassword and redirect to file "login_success.php"
-		session_register("myemail");
-		session_register("mypassword"); 
+		session_start();
+		$result = mysql_query("SELECT first_name FROM `Person` WHERE email = '$myemail'");
+		$row = mysql_fetch_array($result);
+		$_SESSION['userID'] = $row['pid'];
+		$_SESSION['useremail'] = $myemail;
+		// session_register("myemail");
+		// session_register("mypassword"); 
 		header("location:login_success.php");
 	}
 	else {

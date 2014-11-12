@@ -1,7 +1,7 @@
 <html>
 	<table width="450" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 		<tr>
-			<form name="form1" method="post" action="process.php">
+			<form name="form1" method="post" action="storeRequest.php">
 				<td>
 					<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
 						<tr>
