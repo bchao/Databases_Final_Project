@@ -1,8 +1,11 @@
 <?php
 	$host="localhost"; // Host name 
-        $username="thnbgr_admin"; // Mysql email 
-        $password="Database101"; // Mysql password 
-        $db_name="thnbgr_db"; // Database name 
+    $username="thnbgr_admin"; // Mysql email 
+    $password="Database101"; // Mysql password 
+    $db_name="thnbgr_db"; // Database name 
+
+    mysql_connect("$host", "$username", "$password")or die(mysql_error());
+    mysql_select_db("$db_name")or die("cannot select DB");
 
 	//set sizes of groups
 	$MIN_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 11);
@@ -12,11 +15,6 @@
 	matchRequests();
 
 	function matchRequests(){
-        	// Connect to server and select database.
-        	mysql_connect("$host", "$username", "$password")or die(mysql_error());
-        	mysql_select_db("$db_name")or die("cannot select DB");
-
-
 		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
 		$topics = array();
 		while($line = mysql_fetch_row($topics_query)){
