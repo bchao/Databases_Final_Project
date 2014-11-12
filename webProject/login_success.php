@@ -6,8 +6,8 @@
 	<body>
 		Login Successful
 		<?php
-			echo $_SESSION['userID'];
-			echo $_SESSION['useremail'];
+			// echo $_SESSION['userID'];
+			// echo $_SESSION['useremail'];
 		?>
 
 		<form action="makeRequest.php" method="post"> 

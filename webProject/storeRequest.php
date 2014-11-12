@@ -12,21 +12,22 @@
 
 	// email and password sent from form 
 	$mypid = $_SESSION['userID'];
-	echo $mypid;
+	// echo $mypid;
 
 	$mytopic = $_POST['topic'];
 	$result = mysql_query("SELECT topid FROM Topic WHERE name = '$mytopic'");
 	$row = mysql_fetch_array($result);
 	$mytopid = $row['topid'];
-	echo $mytopid;
+	// echo $mytopid;
 
 	$month = $_POST['month'];
 	$day = $_POST['day'];
 	$year = $_POST['year'];
 	$mydate = $month . $day . $year;
-	echo $mydate;
+	// echo $mydate;
+
 	$mytime=$_POST['time'];
-	echo $mytime;
+	// echo $mytime;
 
 	$groupSize = $_POST['group'];
 	if(strcmp($groupSize, "small group") == 0) {
@@ -46,4 +47,6 @@
 	}
 
 	mysql_query("INSERT INTO Request VALUE('', '$mypid', '$mytopid', '$large', '$med', '$small', '$mytime', 'open')") or die(mysql_error());
+
+	echo "Request made!";
 ?>
