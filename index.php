@@ -36,9 +36,6 @@
 			mysql_query("CREATE TABLE TimeSlot(
 				tsid INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				time_slot_date DATE NOT NULL,
-				large_group_ok BOOLEAN NOT NULL,
-        			medium_group_ok BOOLEAN NOT NULL,
-        			small_group_ok BOOLEAN NOT NULL,
 				time_slot_time VARCHAR(9)
 				CHECK(time_slot_time = 'morning' 
 					OR time_slot_time = 'afternoon' 
