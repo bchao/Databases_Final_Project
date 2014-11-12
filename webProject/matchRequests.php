@@ -7,16 +7,16 @@
     mysql_connect("$host", "$username", "$password")or die(mysql_error());
     mysql_select_db("$db_name")or die("cannot select DB");
 
-	//set sizes of groups
-	$MIN_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 11);
-	$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
-	$GROUP_SIZES = array('large','medium','small');
-
 	matchRequests();
 
 	function matchRequests(){
 		$topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
 		$topics = array();
+
+
+		//set sizes of groups
+		$GROUP_SIZES = array('large','medium','small');
+
 		while($line = mysql_fetch_row($topics_query)){
 			$topics[] = $line[0];
 		}
@@ -27,12 +27,18 @@
 		}
 	}
 
-
 	//matches up requests for specified topic and size
 	function matchRequestsForTopicAndSize($topic, $group_size){
 
+		$MIN_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 11);
+		$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
+
+		echo 'test2';
+
 		$made_update = true;
 		while ($made_update){
+			echo 'test3';
+			$top_time_slot = 'hello';
 			switch($group_size){
 				case 'small':
 					$top_time_slot = mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
@@ -43,8 +49,12 @@
 				default:
 					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
 			}
-			if(mysql_num_rows($top_time_slot) > 0){
+			echo $top_time_slot;
+			if($top_time_slot != 0){
 				$meeting = mysql_fetch_array($top_time_slot);
+
+				echo 'hello';
+				echo $meeting['num_people'];
 				if ($meeting['num_people'] >= $MIN_GROUP_SIZE[$group_size]){
 					$tsid = $meeting['tsid'];
 					switch($group_size){
@@ -74,8 +84,6 @@
 			}
 		}
 	}
-
-
 
 	//takes an array of people's ids to be added, a topic id, and a time slot it
 	//creates a meeting for them with the specified time and topic, adds them to PersonAttendingMeeting, and updates their requests

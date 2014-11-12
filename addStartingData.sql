@@ -135,8 +135,7 @@ INSERT INTO RequestTimes VALUES
   (16,2),
   (16,3);
 
-
-INSERT INTO Meeting VALUES
+/*INSERT INTO Meeting VALUES
   (1,1,3),
   (2,2,6);
 
@@ -146,3 +145,4 @@ INSERT INTO PersonAttendingMeeting VALUES
   (3,1),
   (4,2),
   (5,2);
+  */
