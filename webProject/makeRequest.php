@@ -61,9 +61,9 @@
 							<td>:</td>
 							<td>
 								<select name="group">
-									<option>small_group_ok</option>
-									<option>medium_group_ok</option>
-									<option>large_group_ok</option>
+									<option>small group</option>
+									<option>medium group</option>
+									<option>large group</option>
 								</select>
 							</td>
 						</tr>

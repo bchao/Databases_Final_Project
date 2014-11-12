@@ -6,7 +6,7 @@ if (isset($_POST['Submit'])) {
 	//selects the database
 	mysql_select_db("thnbgr_db") or die(mysql_error());
 
-	mysql_query("INSERT INTO Person VALUES($_POST[id], 
+	mysql_query("INSERT INTO Person VALUES('',
 		'$_POST[firstname]', 
 		'$_POST[lastname]', 
 		'$_POST[password]', 
@@ -36,12 +36,6 @@ if (isset($_POST['Submit'])) {
 					<td width="294"><input name="lastname" type="text" id="lastname"></td>
 				</tr>
 				
-				<tr>
-					<td width="78">ID</td>
-					<td width="6">:</td>
-					<td width="294"><input name="id" type="int" id="id"></td>
-				</tr>
-
 				<tr>
 					<td width="78">Email</td>
 					<td width="6">:</td>
