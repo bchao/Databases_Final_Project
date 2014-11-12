@@ -36,12 +36,41 @@ INSERT INTO Person VALUES
   (31,'Kate','Horahan','katie105@gmail.com');
 
 INSERT INTO Request VALUES
-  (1,1,1,'2014-10-11 10:23:54','closed'),
-  (2,2,1,'2014-10-11 16:27:34','closed'),
-  (3,3,1,'2014-10-15 09:13:11','closed'),
-  (4,4,2,'2014-10-24 11:30:01','closed'),
-  (5,5,2,'2014-10-13 15:09:08','closed'),
-  (6,6,3,'2014-10-05 15:00:00','open');
+  (1,1,1,TRUE,TRUE,TRUE,'2014-10-11 10:23:54','closed'),
+  (2,2,1,TRUE,TRUE,TRUE,'2014-10-11 16:27:34','closed'),
+  (3,3,1,TRUE,TRUE,TRUE,'2014-10-15 09:13:11','closed'),
+  (4,4,2,TRUE,TRUE,TRUE,'2014-10-24 11:30:01','closed'),
+  (5,5,2,TRUE,TRUE,TRUE,'2014-10-13 15:09:08','closed'),
+  (6,6,3,TRUE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (7,7,3,FALSE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (8,8,3,TRUE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (9,9,3,FALSE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (10,10,3,FALSE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (11,11,3,TRUE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (12,12,3,TRUE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (13,13,3,FALSE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (14,14,3,TRUE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (15,15,3,TRUE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (16,16,3,TRUE,TRUE,TRUE,'2014-10-05 15:00:00','open'),
+  (17,17,3,TRUE,FALSE,TRUE,'2014-10-05 15:00:00','open'),
+  (18,18,3,TRUE,TRUE,FALSE,'2014-10-05 15:00:00','open'),
+  (19,19,3,FALSE,TRUE,FALSE,'2014-10-05 15:00:00','open'),
+  (20,20,3,TRUE,TRUE,FALSE,'2014-10-05 15:00:00','open'),
+  (21,21,3,FALSE,TRUE,FALSE,'2014-10-05 15:00:00','open'),
+  (22,22,3,FALSE,TRUE,FALSE,'2014-10-05 15:00:00','open'),
+  (23,23,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (24,24,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (25,25,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (26,26,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (27,27,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (28,28,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (29,29,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (30,30,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+  (31,31,3,TRUE,FALSE,FALSE,'2014-10-05 15:00:00','open'),
+
+
+
+
 
 INSERT INTO TimeSlot VALUES
   (1,'2014-11-01','morning'),
@@ -52,6 +81,15 @@ INSERT INTO TimeSlot VALUES
   (6,'2014-11-02','afternoon'),
   (7,'2014-11-02','evening'),
   (8,'2014-11-02','night');
+  (9,'2014-11-03','morning'),
+  (10,'2014-11-03','afternoon'),
+  (11,'2014-11-03','evening'),
+  (12,'2014-11-03','night'),
+  (13,'2014-11-04','morning'),
+  (14,'2014-11-04','afternoon'),
+  (15,'2014-11-04','evening'),
+  (16,'2014-11-04','night'),
+
 
 INSERT INTO RequestTimes VALUES
   (1,1),
@@ -70,7 +108,36 @@ INSERT INTO RequestTimes VALUES
   (5,6),
   (6,6),
   (6,7),
-  (6,8);
+  (6,8),
+  (7,6),
+  (7,7),
+  (7,8),
+  (8,6),
+  (8,8),
+  (8,9),
+  (9,6),
+  (10,6),
+  (11,6),
+  (11,10),
+  (11,11),
+  (11,12),
+  (12,6),
+  (12,5)
+  (12,4),
+  (13,6),
+  (13,7),
+  (13,8),
+  (14,6),
+  (14,13),
+  (14,14),
+  (15,6),
+  (15,15),
+  (15,16),
+  (16,6),
+  (16,1),
+  (16,2),
+  (16,3);
+
 
 INSERT INTO Meeting VALUES
   (1,1,3),
