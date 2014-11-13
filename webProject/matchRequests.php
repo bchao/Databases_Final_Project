@@ -54,7 +54,7 @@
 					$top_time_slot = mysql_query("SELECT * FROM LargeRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				default:
-					echo "error\n";
+					echo "error here\n";
 			}
 
 			if($top_time_slot != 0 and mysql_num_rows($top_time_slot) > 0){
@@ -73,6 +73,7 @@
 							break;
 						case 'large':
 							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							break;
 						default:
 							echo "error\n";
 					}
