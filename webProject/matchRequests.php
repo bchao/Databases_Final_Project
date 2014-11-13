@@ -42,19 +42,19 @@
 			$top_time_slot = 'hello';
 			switch($group_size){
 				case 'small':
-					echo 'case small';
+					echo "case small\n";
 					$top_time_slot = mysql_query("SELECT * FROM SmallRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				case 'medium':
-					echo 'case medium';
+					echo "case medium\n";
 					$top_time_slot = mysql_query("SELECT * FROM MediumRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				case 'large':
-					echo 'case large';
+					echo "case large\n";
 					$top_time_slot = mysql_query("SELECT * FROM LargeRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				default:
-					echo 'error';
+					echo "error\n";
 			}
 
 			if($top_time_slot != 0 and mysql_num_rows($top_time_slot) > 0){
@@ -66,13 +66,15 @@
 					$tsid = $meeting['tsid'];
 					switch($group_size){
 						case 'small':	
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
 							break;
 						case 'medium':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
 							break;
-						default:
+						case 'large':
 							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+						default:
+							echo "error\n";
 					}
 					$people = array();
 					$count = 0;
