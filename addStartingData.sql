@@ -133,7 +133,7 @@ INSERT INTO RequestTimes VALUES
   (16,6),
   (16,1),
   (16,2),
-  (16,3),
+  (16,3);
 
 
 
