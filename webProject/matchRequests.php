@@ -40,15 +40,15 @@
 			$top_time_slot = 'hello';
 			switch($group_size){
 				case 'small':
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM SmallRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT * FROM SmallRequestedTimeSlots WHERE topid = '$topic' ORDER BY num_people DESC;");
 					break;
 				case 'medium':
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM MediumRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT * FROM MediumRequestedTimeSlots WHERE topid = '$topic' ORDER BY num_people DESC;");
 					break;
 				default:
-					$top_time_slot = mysql_query("SELECT TOP 1 * FROM LargeRequestedTimeSlots WHERE (topid = '$topic') ORDER BY num_people DESC;");
+					$top_time_slot = mysql_query("SELECT * FROM LargeRequestedTimeSlots WHERE topid = '$topic' ORDER BY num_people DESC;");
 			}
-			//echo $top_time_slot;
+
 			if($top_time_slot != 0 and mysql_num_rows($top_time_slot) > 0){
 				$meeting = mysql_fetch_array($top_time_slot);
 
@@ -90,7 +90,7 @@
 		mysql_query("INSERT INTO Meeting (topic,meeting_time) VALUES ('$topic','$time_slot');") or die("cannot create meeting");
 
 		//mid is number of elements now in Meeting
-		$mid = mysql_num_rows(mysql_query("SELECT * FROM MEETING;")) or die("cannot get meeting id");
+		$mid = mysql_num_rows(mysql_query("SELECT * FROM Meeting;")) or die("cannot get meeting id");
 		
 		foreach($people as $person){
 			mysql_query("INSERT INTO PersonAttendingMeeting VALUES ('$mid','$person');") or die("cannot add to PersonAttendingMeeting");
