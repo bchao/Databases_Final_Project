@@ -156,7 +156,7 @@ INSERT INTO RequestTimes VALUES
   (28,3),
   (29,3),
   (30,3),
-  (31,7),
+  (31,7);
 
 
 /*INSERT INTO Meeting VALUES
