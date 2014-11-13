@@ -35,8 +35,10 @@
 		//echo 'test2';
 
 		$made_update = true;
-		while ($made_update){
+		$count = 0;
+		while ($made_update and $count < 100){
 			//echo 'test3';
+			$count = $count + 1;
 			$top_time_slot = 'hello';
 			switch($group_size){
 				case 'small':
