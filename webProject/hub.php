@@ -171,7 +171,7 @@
               $query = "
               SELECT name, time
               FROM Meeting, PersonAttendingMeeting
-              WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+              WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid
               "; 
               $query_params = array( 
               ':pid' => $_SESSION['Person']['pid']
@@ -210,8 +210,9 @@
               } 
               catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
   
-              $row = $result->fetch();
-              echo $row['name'] 
+              $row = $stmt->fetch();
+              echo $row['name'];
+              $today = date("g:i a \on F j, Y",$row['time']);
             ?>
 
 
