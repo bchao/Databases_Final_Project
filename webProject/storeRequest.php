@@ -1,18 +1,8 @@
 <?php
-	session_start();
-
-	$host="localhost"; // Host name 
-	$username="thnbgr_admin"; // Mysql email 
-	$password="Database101"; // Mysql password 
-	$db_name="thnbgr_db"; // Database name 
-
-	// Connect to server and select databse.
-	mysql_connect("$host", "$username", "$password")or die(mysql_error()); 
-	mysql_select_db("$db_name")or die("cannot select DB");
+	require("config.php");
 
 	// email and password sent from form 
-	$mypid = $_SESSION['userID'];
-	// echo $mypid;
+	$mypid = $_SESSION['Person']['pid'];
 
 	$mytopic = $_POST['topic'];
 	$result = mysql_query("SELECT topid FROM Topic WHERE name = '$mytopic'");
