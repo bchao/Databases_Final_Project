@@ -185,29 +185,38 @@
               </thead>
 
               <tbody>
+                <?php
+                  // $query = "
+                  //   SELECT name, time
+                  //   FROM Request, Topic
+                  //   WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+                  //   "; 
+                  $query = "
+                    SELECT * FROM Request
+                  ";
+                  $query_params = array( 
+                    ':pid' => $_SESSION['Person']['pid']
+                  ); 
+               
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
 
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['pid'] . '</td>';
+                    echo '<td>' . $row['topid'] . '</td>';
+                    echo '<td>' . $row['time'] . '</td>';
+                    echo '<td>' . $row['status'] . '</td>';
+                  }
+                ?>
               </tbody>
             </table>
 
-            <?php
-            $query = "
-            SELECT name, time
-            FROM Request, Topic
-            WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
-            "; 
-            $query_params = array( 
-            ':pid' => $_SESSION['Person']['pid']
-            ); 
-         
-            try{ 
-               $stmt = $db->prepare($query); 
-               $result = $stmt->execute($query_params); 
-            } 
-            catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-
-            echo $result
-            //$row = $stmt->fetch(); 
-            ?>
+            
 
  
         </div>
