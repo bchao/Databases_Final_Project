@@ -166,7 +166,41 @@
           <h1>Current Requests</h1>
           <hr>
             <h2>Current Requests table goes here</h2>
-            
+            <body>
+              <div class="container">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>pid</th>
+             
+                      <th>topid</th>
+             
+                      <th>time</th>
+             
+                      <th>status</th>
+                    </tr>
+                  </thead>
+             
+                  <tbody>
+                    <?php
+                      require("config.php");
+    
+                      $result = mysql_query("SELECT * FROM Request") or die(mysql_error());
+
+                      while($row = mysql_fetch_array($result)) {
+                        echo '<tr>';
+                        echo '<td>' . $row['pid'] . '</td>';
+                        echo '<td>' . $row['topid'] . '</td>';
+                        echo '<td>' . $row['time'] . '</td>';
+                        echo '<td>' . $row['status'] . '</td>';
+                      }
+                    ?>
+                  </tbody>
+             
+                  <tbody></tbody>
+                </table>
+              </div><!-- /container -->
+            </body>            
         </div>
 
         <div id="pendingrequests" class="tab-pane">
