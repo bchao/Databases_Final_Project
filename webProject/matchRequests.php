@@ -73,6 +73,7 @@
 							break;
 						case 'large':
 							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							break;
 						default:
 							echo "error\n";
 					}

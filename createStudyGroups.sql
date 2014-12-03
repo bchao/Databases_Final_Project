@@ -8,7 +8,7 @@ CREATE TABLE Person(
 	pid INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	first_name VARCHAR(20) NOT NULL,
 	last_name VARCHAR(20) NOT NULL,
-	password VARCHAR(20) NOT NULL default '',
+	password VARCHAR(20) NOT NULL DEFAULT '',
 	email VARCHAR(30) NOT NULL
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE Request(
 	large_group_ok BOOLEAN NOT NULL,
 	medium_group_ok BOOLEAN NOT NULL,
 	small_group_ok BOOLEAN NOT NULL,
-	time VARCHAR(20) NOT NULL,
+	time INTEGER NOT NULL,
 	status VARCHAR(9) NOT NULL
 		CHECK(status = 'open' OR status = 'closed'),
 	KEY(pid,topid)
@@ -54,22 +54,20 @@ CREATE TABLE PersonAttendingMeeting(
 CREATE VIEW LargeRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND large_group_ok = TRUE)
-GROUP BY (topid, tsid)
+WHERE (Request.rid = RequestTimes.rid AND large_group_ok = 1 AND status = 'open')
+GROUP BY topid, tsid
 ORDER BY num_people DESC;
-
 
 CREATE VIEW MediumRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND medium_group_ok = TRUE)
-GROUP BY (topid, tsid)
+WHERE (Request.rid = RequestTimes.rid AND medium_group_ok = 1 AND status = 'open')
+GROUP BY topid, tsid
 ORDER BY num_people DESC;
-
 
 CREATE VIEW SmallRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND small_group_ok = TRUE)
-GROUP BY (topid, tsid)
+WHERE (Request.rid = RequestTimes.rid AND small_group_ok = 1 AND status = 'open')
+GROUP BY topid, tsid
 ORDER BY num_people DESC;
