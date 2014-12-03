@@ -207,6 +207,28 @@
           <h1>Pending Requests</h1>
           <hr>
             <h2>Pending Requests table goes here</h2>
+
+            <?php
+            $query = "
+            SELECT name, time
+            FROM Request, Topic
+            WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+            "; 
+            $query_params = array( 
+            ':pid' => $_SESSION['Person']['pid']
+            ); 
+         
+            try{ 
+               $stmt = $db->prepare($query); 
+               $result = $stmt->execute($query_params); 
+            } 
+            catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+
+            echo $result
+            //$row = $stmt->fetch(); 
+            ?>
+
+
         </div>
 
         <div id="pastrequests" class="tab-pane">
