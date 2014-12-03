@@ -1,4 +1,6 @@
-// Put this code in first line of web page. 
 <?php 
-	session_destroy();
+    require("config.php"); 
+    unset($_SESSION['user']);
+    header("Location: index.php"); 
+    die("Redirecting to: index.php");
 ?>

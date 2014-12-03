@@ -1,124 +1,110 @@
-<html>
-	<b>
-		<?php
-			//connects me to site/database
-			mysql_connect("localhost", "thnbgr_admin", "Database101") or die(mysql_error());
+<?php 
+    require("config.php"); 
+    $submitted_email = ''; 
+    if(!empty($_POST)){ 
+        $query = "
+            SELECT
+              first_name,
+              last_name,
+              password,
+              email
+            FROM Person
+            WHERE
+              email = :email
+        "; 
+        $query_params = array( 
+            ':email' => $_POST['email'] 
+        ); 
+         
+        try{ 
+            $stmt = $db->prepare($query); 
+            $result = $stmt->execute($query_params); 
+        } 
+        catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+        $login_ok = false; 
+        $row = $stmt->fetch(); 
 
-			//selects the database
-			mysql_select_db("thnbgr_db") or die(mysql_error());
+        if($row){ 
+            if($_POST['password'] === $row['password']) {
+              $login_ok = true;
+            }
+        } 
 
-			mysql_query("drop table members");
-			
-			mysql_query("CREATE TABLE members(
-				id INTEGER NOT NULL PRIMARY KEY,
-				first_name VARCHAR(20) NOT NULL,
-				last_name VARCHAR(20) NOT NULL,
-				password VARCHAR(20) NOT NULL default '',
-				email VARCHAR(30) NOT NULL)") or die(mysql_error());
+        if($login_ok){ 
+            unset($row['password']); 
+            $_SESSION['Person'] = $row;  
+            header("Location: secret.php"); 
+            die("Redirecting to: secret.php"); 
+        } 
+        else{ 
+            print("Login Failed."); 
+            $submitted_email = htmlentities($_POST['email'], ENT_QUOTES, 'UTF-8'); 
+        } 
+    } 
+?> 
 
-			mysql_query("INSERT INTO members VALUES('', 'peter', 'yom', 'password', 'ypeter999')") or die(mysql_error());
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Study Buddies</title>
+    <meta name="description" content="Home page">
 
-		?>
-		<!-- user login -->
-		<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-			<tr>
-				<form name="form1" method="post" action="checklogin.php">
-					<td>
-						<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-							<tr>
-								<td colspan="3"><strong>Member Login </strong></td>
-							</tr>
-							<tr>
-								<td width="78">Email</td>
-								<td width="6">:</td>
-								<td width="294"><input name="email" type="text" id="email"></td>
-							</tr>
-							<tr>
-								<td>Password</td>
-								<td>:</td>
-								<td><input name="password" type="text" id="password"></td>
-							</tr>
-							<tr>
-								<td>&nbsp;</td>
-								<td>&nbsp;</td>
-								<td><input type="submit" name="Submit" value="Login"></td>
-							</tr>
-						</table>
-					</td>
-				</form>
-			</tr>
-		</table>
-		<?php
-		
-			//connects me to site/database
-			mysql_connect("localhost", "thnbgr_admin", "Database101") or die(mysql_error());
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="assets/bootstrap.min.js"></script>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <style type="text/css">
+        body { background: url(assets/bglight.png); }
+        .hero-unit { background-color: #fff; }
+        .center { display: block; margin: 0 auto; }
+    </style>
+</head>
 
-			//selects the database
-			mysql_select_db("thnbgr_db") or die(mysql_error());
+<body>
 
-			mysql_query("drop table Topic");
+<div class="navbar navbar-fixed-top navbar-inverse">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+      <a class="brand">Study Buddies</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav pull-right">
+          <li><a href="register.php">Register</a></li>
+          <li class="divider-vertical"></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Log In <strong class="caret"></strong></a>
+            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                <form action="index.php" method="post"> 
+                    Email:<br /> 
+                    <input type="text" name="email" value="<?php echo $submitted_email; ?>" /> 
+                    <br /><br /> 
+                    Password:<br /> 
+                    <input type="password" name="password" value="" /> 
+                    <br /><br /> 
+                    <input type="submit" class="btn btn-info" value="Login" /> 
+                </form> 
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
 
-			mysql_query("CREATE TABLE Topic(
-				topid INTEGER NOT NULL PRIMARY KEY,
-				name VARCHAR(50) NOT NULL,
-				description VARCHAR(300))") or die(mysql_error());
+<div class="container hero-unit">
+    <h1>Please register or log in!</h1>
+    <p>You can't do anything until you register and log in.</p>
+    <ul>
+        <li>Create a new user with the <strong>Register</strong> button in the navbar.</li>
+        <li>Use the default credentials for testing:<br />
+            <strong>email:</strong> test@gmail.com<br />
+            <strong>pass:</strong> password<br /></li>
+    </ul>
+</div>
 
-			mysql_query("drop table Person");
-			
-			mysql_query("CREATE TABLE Person(
-				pid INTEGER NOT NULL PRIMARY KEY,
-				first_name VARCHAR(20) NOT NULL,
-				last_name VARCHAR(20) NOT NULL,
-				password VARCHAR(20) NOT NULL default '',
-				email VARCHAR(30) NOT NULL)") or die(mysql_error());
-
-			mysql_query("drop table Request");
-			
-			mysql_query("CREATE TABLE Request(
-				rid INTEGER NOT NULL PRIMARY KEY,
-				pid INTEGER NOT NULL REFERENCES Person(pid),
-				topid INTEGER NOT NULL REFERENCES Topic(topid),
-				time TIMESTAMP NOT NULL,
-				status VARCHAR(9) NOT NULL CHECK(status = 'open' OR status = 'closed'))") or die(mysql_error());
-
-			mysql_query("drop table TimeSlot");
-			
-			mysql_query("CREATE TABLE TimeSlot(
-				tsid INTEGER NOT NULL PRIMARY KEY,
-				time_slot_date DATE NOT NULL,
-				time_slot_time VARCHAR(9)
-				CHECK(time_slot_time = 'morning' 
-					OR time_slot_time = 'afternoon' 
-					OR time_slot_time = 'evening' 
-					OR time_slot_time = 'night'))") or die(mysql_error());
-
-			mysql_query("drop table RequestTimes");
-			
-			mysql_query("CREATE TABLE RequestTimes(
-				rid INTEGER NOT NULL REFERENCES Request(rid),
-				tsid INTEGER NOT NULL REFERENCES TimeSlot(tsid),
-				PRIMARY KEY(rid,tsid))") or die(mysql_error());
-
-			mysql_query("drop table Meeting");
-			
-			mysql_query("CREATE TABLE Meeting(
-				mid INTEGER NOT NULL PRIMARY KEY,
-				topic INTEGER NOT NULL REFERENCES Topic(topid),
-				meeting_time INTEGER NOT NULL REFERENCES TimeSlot(tsid))") or die(mysql_error());
-			
-			mysql_query("drop table PersonAttendingMeeting");
-			
-			mysql_query("CREATE TABLE PersonAttendingMeeting(
-				pid INTEGER NOT NULL REFERENCES Person(pid),
-				mid INTEGER NOT NULL REFERENCES Meeting(mid),
-				PRIMARY KEY(pid,mid))") or die(mysql_error());
-
-			mysql_query("INSERT INTO Person VALUES(1, 'peter', 'yom', 'password', 'ypeter999')") or die(mysql_error());
-
-			mysql_query("drop table example");
-
-			echo "success";
-			
-		?>
-	</b>
+</body>
 </html>
