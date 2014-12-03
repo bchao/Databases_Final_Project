@@ -163,10 +163,30 @@
         </div>
 
         <div id="currentrequests" class="tab-pane">
-          <h1>Current Requests</h1>
+          <h1>Scheduled Meetings</h1>
           <hr>
-            <h2>Current Requests table goes here</h2>
-            
+            <h2>Scheduled Meetings table goes here</h2>
+            <!--
+            <?php
+              $query = "
+              SELECT name, time
+              FROM Meeting, PersonAttendingMeeting
+              WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+              "; 
+              $query_params = array( 
+              ':pid' => $_SESSION['Person']['pid']
+              ); 
+          
+              try{ 
+                 $stmt = $db->prepare($query); 
+                 $result = $stmt->execute($query_params); 
+              } 
+              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+  
+              echo $result
+              //$row = $stmt->fetch(); 
+            ?>
+            -->
         </div>
 
         <div id="pendingrequests" class="tab-pane">
@@ -175,23 +195,23 @@
             <h2>Pending Requests table goes here</h2>
 
             <?php
-            $query = "
-            SELECT name, time
-            FROM Request, Topic
-            WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
-            "; 
-            $query_params = array( 
-            ':pid' => $_SESSION['Person']['pid']
-            ); 
-         
-            try{ 
-               $stmt = $db->prepare($query); 
-               $result = $stmt->execute($query_params); 
-            } 
-            catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-
-            echo $result
-            //$row = $stmt->fetch(); 
+              $query = "
+              SELECT name, time
+              FROM Request, Topic
+              WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+              "; 
+              $query_params = array( 
+              ':pid' => $_SESSION['Person']['pid']
+              ); 
+          
+              try{ 
+                 $stmt = $db->prepare($query); 
+                 $result = $stmt->execute($query_params); 
+              } 
+              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+  
+              $row = $result->fetch();
+              echo $row['name'] 
             ?>
 
 
