@@ -52,5 +52,5 @@
 	$rid = mysql_num_rows(mysql_query("SELECT * FROM Request;")) or die("cannot get request id");
 	mysql_query("INSERT INTO RequestTimes VALUE('$rid', '$tsid')") or die(mysql_error());
 
-	echo "Request made!";
+    header("Location: requestSuccess.php"); 
 ?>

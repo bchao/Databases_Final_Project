@@ -33,8 +33,8 @@
         if($login_ok){ 
             unset($row['password']); 
             $_SESSION['Person'] = $row;  
-            header("Location: secret.php"); 
-            die("Redirecting to: secret.php"); 
+            header("Location: hub.php"); 
+            die("Redirecting to: hub.php"); 
         } 
         else{ 
             print("Login Failed."); 

@@ -1,4 +1,11 @@
 <?php
+    // host:thnbgr.com
+    // username: admin@thnbgr.com
+    // password: Database101
+
+    // username: thnbgr
+    // password: KimJongBro888
+
     // These variables define the connection information for your MySQL database 
     $username = "databaseuser"; 
     $password = "databasepass"; 
