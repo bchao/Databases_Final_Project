@@ -43,43 +43,49 @@
     } 
 ?> 
 
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Study Buddies</title>
     <meta name="description" content="Home page">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="assets/bootstrap.min.js"></script>
-    <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
         body { background: url(assets/bglight.png); }
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
+        .dd { padding-bottom: 20px; }
+
+        .bs-example{
+            margin: 20px;
+        }
     </style>
-</head>
-
+</head> 
 <body>
+<div class="navbar navbar-static-top" role="navigation">
+    <nav role="navigation" class="navbar navbar-default navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Study Buddies</a>
+        </div>
 
-<div class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand">Study Buddies</a>
-      <div class="nav-collapse collapse">
-        <ul class="nav pull-right">
-          <li><a href="register.php">Register</a></li>
-          <li class="divider-vertical"></li>
-          <li class="dropdown">
-            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Log In <strong class="caret"></strong></a>
-            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                <form action="index.php" method="post"> 
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="register.php">Register</a></li>
+                <li class="divider-vertical"></li>
+
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle dd" >Login <b class="caret"></b></a>
+                    <ul role="menu" class="dropdown-menu dropdown-menu-right" style="padding: 15px; padding-bottom: 0px;">              
+<form action="index.php" method="post"> 
                     Email:<br /> 
                     <input type="text" name="email" value="<?php echo $submitted_email; ?>" /> 
                     <br /><br /> 
@@ -88,16 +94,16 @@
                     <br /><br /> 
                     <input type="submit" class="btn btn-info" value="Login" /> 
                 </form> 
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div class="container hero-unit">
-    <h1>Please register or log in!</h1>
+
+<h1>Please register or log in!</h1>
     <p>You can't do anything until you register and log in.</p>
     <ul>
         <li>Create a new user with the <strong>Register</strong> button in the navbar.</li>
@@ -105,7 +111,11 @@
             <strong>email:</strong> test@gmail.com<br />
             <strong>pass:</strong> password<br /></li>
     </ul>
+
 </div>
+
 
 </body>
 </html>
+
+

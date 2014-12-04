@@ -21,6 +21,7 @@
         body { background: url(assets/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
+        .block { background-color: #fff; }
 
         .fixme { position: fixed; }
         /* Landscape phone to portrait tablet */
@@ -182,7 +183,7 @@
                     AND meeting_time = TimeSlot.tsid
                   "; 
                   $query_params = array( 
-                  ':pid' => $_SESSION['Person']['pid']
+                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
                   ); 
               
                   try{ 
@@ -208,13 +209,20 @@
         <div id="pendingrequests" class="tab-pane">
           <h1>Pending Requests</h1>
           <hr>
-            <h2>Pending Requests table goes here</h2>
+<ul class="list-group">
+  <li class="list-group-item">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+  <li class="list-group-item">Morbi leo risus</li>
+  <li class="list-group-item">Porta ac consectetur ac</li>
+  <li class="list-group-item">Vestibulum at eros</li>
+</ul>
+          <hr>
 
-            <table class="table table-striped">
+            <table class="table table-striped table-hover">
               <thead>
-                <tr>
-                  <th>name</th>
-                  <th>time</th>
+                <tr class = "active">
+                  <td>name</td>
+                  <td>time</td>
                 </tr>
               </thead>
 
@@ -227,7 +235,7 @@
                     "; 
 
                   $query_params = array( 
-                    ':pid' => $_SESSION['Person']['pid']
+                    ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
                   ); 
                
                   try{ 
@@ -238,6 +246,7 @@
 
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
+                    echo '<tr>';
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time'] . '</td>';

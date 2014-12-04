@@ -15,10 +15,10 @@
     <meta name="description" content="Hub Page">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="assets/bootstrap.min.js"></script>
-    <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="dist/js/bootstrap.min.js"></script>
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
-        body { background: url(assets/bglight.png); }
+        body { background: url(dist/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
 

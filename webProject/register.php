@@ -80,57 +80,74 @@
     } 
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title>Study Buddies Register</title>
     <meta name="description" content="Register for Study Buddies">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="assets/bootstrap.min.js"></script>
-    <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
         body { background: url(assets/bglight.png); }
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
+
+        .bs-example{
+            margin: 20px;
+        }
     </style>
-</head>
-
+</head> 
 <body>
+<div class="navbar navbar-static-top" role="navigation">
+    <nav role="navigation" class="navbar navbar-default navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Study Buddies</a>
+        </div>
 
-<div class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand">Study Buddies</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li><a href="index.php">Return Home</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+        <div id="navbarCollapse" class="collapse navbar-collapse ">
+            <ul class="nav navbar-nav">
+                <li><a href="index.php">Return Home</a></li>
+                
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div class="container hero-unit">
     <h1>Register</h1> <br /><br />
-    <form action="register.php" method="post"> 
-        <label>First Name:</label> 
-        <input type="text" name="first_name" value="" /> 
-        <label>Last Name:</label> 
-        <input type="text" name="last_name" value="" /> 
-        <label>Email: <strong style="color:darkred;">*</strong></label> 
-        <input type="text" name="email" value="" /> 
-        <label>Password:</label> 
-        <input type="password" name="password" value="" /> <br /><br />
-        <input type="submit" class="btn btn-info" value="Register" /> 
-    </form>
+
+<form method="post" action="register.php">
+  <div class="col-xs-4">
+    <label for="fn">First Name</label>
+    <input type="text" class="form-control" id="fn" name="first_name" placeholder="Enter first name">
+  </div> <br /><br /><br /><br />
+  <div class="col-xs-4">
+    <label for="ln">Last Name</label>
+    <input type="text" class="form-control" id="ln" name="last_name" placeholder="Enter last name">
+  </div> <br /><br /><br /><br />
+  <div class="col-xs-4">
+    <label for="em">Email</label>
+    <input type="text" class="form-control" id="em" name="email" placeholder="Enter email">
+  </div> <br /><br /><br /><br />
+  <div class="col-xs-4">
+    <label for="pw">Password</label>
+    <input type="password" class="form-control" id="pw" name="password" placeholder="Enter password">
+  </div> <br /><br /><br /><br />
+  <button type="submit" class="btn btn-default col-xs-4">Submit</button> <br /><br /><br /><br />
+</form>
+
 </div>
 
+
 </body>
-</html>
+</html>                                     

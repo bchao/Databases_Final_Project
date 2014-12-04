@@ -1,9 +1,6 @@
 <?php
 	require("config.php");
 
-	// email and password sent from form 
-	$my_pid = htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8');
-
 	$mytopic = $_POST['topic'];
 	$query = "
 		SELECT topid 
@@ -76,12 +73,12 @@
 	";
 	$query_params = array(
 		':count' => $count,
-		':pid' => $my_pid,
-		'topid' => $mytopid,
-		'large' => $large,
-		'med' => $med,
-		'small' => $small,
-		'curtime' => $curtime
+		':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
+		':topid' => $mytopid,
+		':large' => $large,
+		':med' => $med,
+		':small' => $small,
+		':curtime' => $curtime
 	);
 
 	try{
