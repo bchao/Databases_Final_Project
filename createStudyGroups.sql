@@ -54,7 +54,7 @@ CREATE TABLE PersonAttendingMeeting(
 CREATE VIEW PersonBusyDuringTimeSlot AS
 SELECT pid, meeting_time
 FROM Meeting, PersonAttendingMeeting
-WHERE Meeting.mid = PersonAttendingMeeting.mid
+WHERE Meeting.mid = PersonAttendingMeeting.mid;
 
 CREATE VIEW LargeRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people

@@ -122,7 +122,7 @@
 							$query = "
 								SELECT pid 
 								FROM Request, RequestTimes 
-								WHERE (topid = :topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+								WHERE (topid = :topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
 									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
@@ -136,7 +136,7 @@
 							$query = "
 								SELECT pid 
 								FROM Request, RequestTimes 
-								WHERE (topid = :topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+								WHERE (topid = :topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
 									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
@@ -150,7 +150,7 @@
 							$query = "
 								SELECT pid 
 								FROM Request, RequestTimes 
-								WHERE (topid = :topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+								WHERE (topid = :topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
 									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
@@ -258,6 +258,7 @@
 
 		$message = "You have a meeting for " . $topic_name . " scheduled on the " . $slot_time . " of " . $slot_date . ".\r\n";
 		$message = $message . "Your group members are listed below. \r\n\r\n";
+		$headers = 'From: Scheduler@StudyBuddies.com';
 
 		foreach($people as $person) {
 
@@ -329,8 +330,8 @@
 			$email = $email_row['email'];
 
 
-			mail($email, $subject, $message);
-			//mail('brandonchao3@gmail.com', $subject, $message);
+			//mail($email, $subject, $message, $headers);
+			mail('brandonchao3@gmail.com', $subject, $message, $headers);
 
 
 			$query = "
