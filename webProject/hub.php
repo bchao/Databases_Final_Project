@@ -165,6 +165,27 @@
         <div id="currentrequests" class="tab-pane">
           <h1>Current Requests</h1>
           <hr>
+            <!--
+            <?php
+              $query = "
+              SELECT name, time
+              FROM Meeting, PersonAttendingMeeting
+              WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid
+              "; 
+              $query_params = array( 
+              ':pid' => $_SESSION['Person']['pid']
+              ); 
+          
+              try{ 
+                 $stmt = $db->prepare($query); 
+                 $result = $stmt->execute($query_params); 
+              } 
+              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+  
+              echo $result
+              //$row = $stmt->fetch(); 
+            ?>
+            -->
             <h2>Current Requests table goes here</h2>
                
         </div>
@@ -174,26 +195,23 @@
           <hr>
             <h2>Pending Requests table goes here</h2>
 
+
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>pid</th>
-                  <th>topid</th>
+                  <th>name</th>
                   <th>time</th>
-                  <th>status</th>
                 </tr>
               </thead>
 
               <tbody>
                 <?php
-                  // $query = "
-                  //   SELECT name, time
-                  //   FROM Request, Topic
-                  //   WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
-                  //   "; 
                   $query = "
-                    SELECT * FROM Request
-                  ";
+                    SELECT name, time
+                    FROM Request, Topic
+                    WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+                    "; 
+
                   $query_params = array( 
                     ':pid' => $_SESSION['Person']['pid']
                   ); 
@@ -207,18 +225,14 @@
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
-                    echo '<td>' . $row['pid'] . '</td>';
-                    echo '<td>' . $row['topid'] . '</td>';
-                    echo '<td>' . $row['time'] . '</td>';
-                    echo '<td>' . $row['status'] . '</td>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . date("g:i a \on F j, Y",$row['time']) . '</td>';
                   }
                 ?>
               </tbody>
             </table>
 
-            
 
- 
         </div>
 
         <div id="pastrequests" class="tab-pane">
