@@ -102,8 +102,36 @@
 
 		//mid is number of elements now in Meeting
 		$mid = mysql_num_rows(mysql_query("SELECT * FROM Meeting;")) or die("cannot get meeting id");
-		
+
+		$topic_name_row = mysql_fetch_array(mysql_query("SELECT name FROM Topic WHERE topid=$topic"));
+		$topic_name = $topic_name_row['name'];
+		$slot_date_row = mysql_fetch_array(mysql_query("SELECT time_slot_date FROM TimeSlot WHERE tsid=$time_slot"));
+		$slot_date = $slot_date_row['time_slot_date'];
+		$slot_time_row = mysql_fetch_array(mysql_query("SELECT time_slot_time FROM TimeSlot WHERE tsid=$time_slot"));
+		$slot_time = $slot_time_row['time_slot_time'];
+
+		$message = "You have a meeting for " . $topic_name . " scheduled on the " . $slot_time . " of " . $slot_date . ".\r\n";
+		$message = $message . "Your group members are listed below. \r\n\r\n";
+
+		foreach($people as $person) {
+			$first_name_row = mysql_fetch_array(mysql_query("SELECT first_name FROM Person WHERE pid=$person"));
+			$first_name = $first_name_row['first_name'];
+
+			$last_name_row = mysql_fetch_array(mysql_query("SELECT last_name FROM Person WHERE pid=$person"));
+			$last_name = $last_name_row['last_name'];
+
+			$person_email_row = mysql_fetch_array(mysql_query("SELECT email FROM Person WHERE pid=$person"));
+			$person_email = $person_email_row['email'];
+
+			$message = $message . $first_name . " " . $last_name . " - " . $person_email . " \r\n";
+		}
+
 		foreach($people as $person){
+			$subject = "Study Buddies " . $topic_name . " Meeting Scheduled!";
+			$email_row = mysql_fetch_array(mysql_query("SELECT email FROM Person WHERE pid=$person"));
+			$email = $email_row['email'];
+			mail($email, $subject, $message);
+			// mail('brandonchao3@gmail.com', $subject, $message);
 			mysql_query("INSERT INTO PersonAttendingMeeting VALUES ($person, $mid);") or die("cannot add to PersonAttendingMeeting");
 			mysql_query("UPDATE Request SET status = 'closed' WHERE (pid = $person AND topid = $topic);") or die("cannot update Request");
 		}
