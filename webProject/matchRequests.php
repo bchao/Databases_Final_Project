@@ -66,13 +66,19 @@
 					$tsid = $meeting['tsid'];
 					switch($group_size){
 						case 'small':	
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							$people_query = mysql_query("SELECT Request.pid FROM Request, RequestTimes 
+								WHERE (topid = $topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open'
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid));");	
 							break;
 						case 'medium':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							$people_query = mysql_query("SELECT Request.pid FROM Request, RequestTimes 
+								WHERE (topid = $topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open'
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid));");	
 							break;
 						case 'large':
-							$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
+							$people_query = mysql_query("SELECT Request.pid FROM Request, RequestTimes 
+								WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open' 
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid));");	
 							break;
 						default:
 							echo "error\n";
