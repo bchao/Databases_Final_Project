@@ -102,8 +102,21 @@
 
 		//mid is number of elements now in Meeting
 		$mid = mysql_num_rows(mysql_query("SELECT * FROM Meeting;")) or die("cannot get meeting id");
-		
+
+		$topic_name = mysql_query("SELECT name FROM Topic WHERE topid=$topic");
+		$slot_date = mysql_query("SELECT time_slot_date FROM TimeSlot WHERE tsid=$time_slot");
+		$slot_time = mysql_query("SELECT time_slot_time FROM TimeSlot WHERE tsid=$time_slot");
+		$message = 'You have a meeting for ' . $topic_name . ' scheduled on ' . $slot_date . ' at ' . $slot_time . '.';
+
+		foreach($people as $person) {
+			
+		}
+
 		foreach($people as $person){
+			$subject = 'Study Buddies ' . $topic_name . ' Meeting Scheduled!';
+			$email = mysql_query("SELECT email FROM Person WHERE pid=$person");
+			mail($email, $subject, $message);
+
 			mysql_query("INSERT INTO PersonAttendingMeeting VALUES ($person, $mid);") or die("cannot add to PersonAttendingMeeting");
 			mysql_query("UPDATE Request SET status = 'closed' WHERE (pid = $person AND topid = $topic);") or die("cannot update Request");
 		}
