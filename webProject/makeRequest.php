@@ -57,13 +57,32 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Group Preference</td>
+							<td>Small Group Ok</td>
 							<td>:</td>
 							<td>
-								<select name="group">
-									<option>small group</option>
-									<option>medium group</option>
-									<option>large group</option>
+								<select name="smallGroupOk">
+									<option>yes</option>
+									<option>no</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Medium Group Ok</td>
+							<td>:</td>
+							<td>
+								<select name="mediumGroupOk">
+									<option>yes</option>
+									<option>no</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Large Group Ok</td>
+							<td>:</td>
+							<td>
+								<select name="largeGroupOk">
+									<option>yes</option>
+									<option>no</option>
 								</select>
 							</td>
 						</tr>
