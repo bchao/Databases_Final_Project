@@ -163,30 +163,45 @@
         </div>
 
         <div id="currentrequests" class="tab-pane">
-          <h1>Current Requests</h1>
+          <h1>Scheduled Meetings</h1>
           <hr>
-            <!--
-            <?php
-              $query = "
-              SELECT name, time
-              FROM Meeting, PersonAttendingMeeting
-              WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid
-              "; 
-              $query_params = array( 
-              ':pid' => $_SESSION['Person']['pid']
-              ); 
-          
-              try{ 
-                 $stmt = $db->prepare($query); 
-                 $result = $stmt->execute($query_params); 
-              } 
-              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-  
-              echo $result
-              //$row = $stmt->fetch(); 
-            ?>
-            -->
-            <h2>Current Requests table goes here</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                 $query = "
+                  SELECT name, time_slot_date, time_slot_time
+                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
+                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
+                    AND meeting_time = TimeSlot.tsid
+                  "; 
+                  $query_params = array( 
+                  ':pid' => $_SESSION['Person']['pid']
+                  ); 
+              
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+      
+ 
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['time_slot_time'] + ' on ' + $row['time_slot_date'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
+            <h2>Scheduled Meetings table goes here</h2>
                
         </div>
 
