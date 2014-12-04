@@ -180,10 +180,11 @@
                   SELECT name, time_slot_date, time_slot_time
                   FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
                   WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
-                    AND meeting_time = TimeSlot.tsid
+                    AND meeting_time = TimeSlot.tsid AND time_slot_date >= :currentDate
                   "; 
                   $query_params = array( 
-                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
+                  ':currentDate' => date("Y-m-d",time())
                   ); 
               
                   try{ 
@@ -197,12 +198,11 @@
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time_slot_time'] + ' on ' + $row['time_slot_date'] . '</td>';
+                    echo '<td>' . $row['time_slot_time'] . ' on ' . $row['time_slot_date'] . '</td>';
                   }
                 ?>
               </tbody>
             </table>
-            <h2>Scheduled Meetings table goes here</h2>
                
         </div>
 
@@ -260,10 +260,46 @@
  
         </div>
 
-        <div id="pastrequests" class="tab-pane">
-          <h1>Past Requests</h1>
+                <div id="pastrequests" class="tab-pane">
+          <h1>Past Meetings</h1>
           <hr>
-            <h2>Past Requests table goes here</h2>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                 $query = "
+                  SELECT name, time_slot_date, time_slot_time
+                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
+                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
+                    AND meeting_time = TimeSlot.tsid AND time_slot_date < :currentDate
+                  "; 
+                  $query_params = array( 
+                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
+                  ':currentDate' => date("Y-m-d",time())
+                  ); 
+              
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+      
+ 
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['time_slot_time'] . ' on ' . $row['time_slot_date'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
         </div>        
       </div>
     </div>
