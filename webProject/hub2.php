@@ -61,7 +61,8 @@
 <div class="container hero-unit">
   <div class="row tabbable well" role="tabpanel">
     <div class="col-md-3 fixme">
-      <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['first_name'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
+      <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
+      <h2>Welcome, <?php echo $_SESSION['Person']['first_name']; ?>!</h2>
       <hr>
       <h4>Navigation</h4>
       <!-- Nav tabs -->
@@ -143,6 +144,46 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <hr>Pending Requests</h1>
+          <hr>
+
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr class = "active">
+                  <td>name</td>
+                  <td>time</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                  $query = "
+                    SELECT *
+                    FROM Request, Topic
+                    WHERE pid = :pid AND Request.topid = Topic.topid
+                    "; 
+
+                  $query_params = array( 
+                    ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                  ); 
+               
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['time'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
+
+          </hr>
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
           <hr>Past Requests</h1>

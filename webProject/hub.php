@@ -21,7 +21,6 @@
         body { background: url(assets/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
-        .block { background-color: #fff; }
 
         .fixme { position: fixed; }
         /* Landscape phone to portrait tablet */

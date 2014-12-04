@@ -58,7 +58,6 @@
         body { background: url(assets/bglight.png); }
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
-        .dd { padding-bottom: 20px; }
 
         .bs-example{
             margin: 20px;
@@ -83,7 +82,7 @@
                 <li class="divider-vertical"></li>
 
                 <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle dd" >Login <b class="caret"></b></a>
+                    <a data-toggle="dropdown" class="dropdown-toggle" >Login <b class="caret"></b></a>
                     <ul role="menu" class="dropdown-menu dropdown-menu-right" style="padding: 15px; padding-bottom: 0px;">              
 <form action="index.php" method="post"> 
                     Email:<br /> 
