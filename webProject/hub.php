@@ -78,7 +78,7 @@
                 <div class="control-group">
                   <label class="control-label">Topic</label>
                   <div class="controls">
-                    <select id="topic" name="topic" class="input-xlarge">
+                    <select id="topic" name="topic" class="span3">
                       <option value=""selected="selected">(please select a topic)</option>
                       <option>Math</option>
                       <option>History</option>
@@ -92,7 +92,7 @@
                 <div class="control-group">
                   <label class="control-label">Date</label>
                   <div class="controls">
-                    <select id="month" name="month" class="input-small">
+                    <select id="month" name="month" class="span1">
                       <option value=""selected="selected">(month)</option>
                       <option>Jan</option><option>Feb</option>
                       <option>Mar</option><option>Apr</option>
@@ -102,7 +102,7 @@
                       <option>Nov</option><option>Dec</option>
                     </select>
 
-                    <select id="day" name="day" class="input-small">
+                    <select id="day" name="day" class="span1">
                       <option value=""selected="selected">(day)</option>
                       <option>01</option><option>02</option>
                       <option>03</option><option>04</option>
@@ -122,7 +122,7 @@
                       <option>31</option>
                     </select>
 
-                    <select id="year" name="year" class="input-small">
+                    <select id="year" name="year" class="span1">
                       <option value=""selected="selected">(year)</option>
                       <option>2014</option><option>2015</option>
                       <option>2016</option><option>2017</option>
@@ -134,7 +134,7 @@
                 <div class="control-group">
                   <label class="control-label">Group Preference</label>
                   <div class="controls">
-                    <select id="grouppref" name="grouppref" class="input-xlarge">
+                    <select id="grouppref" name="grouppref" class="span3">
                       <option value=""selected="selected">(please select a preference)</option>
                       <option value="small">Small</option>
                       <option value="medium">Medium</option>
@@ -147,7 +147,7 @@
                 <div class="control-group">
                   <label class="control-label">Time</label>
                   <div class="controls">
-                    <select id="time" name="time" class="input-xlarge">
+                    <select id="time" name="time" class="span3">
                       <option value=""selected="selected">(please select a time)</option>
                       <option value="morning">Morning</option>
                       <option value="afternooon">Afternoon</option>
