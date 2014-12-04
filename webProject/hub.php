@@ -92,7 +92,7 @@
                 <div class="control-group">
                   <label class="control-label">Date</label>
                   <div class="controls">
-                    <select id="month" name="month" class="span1">
+                    <select id="month" name="month" class="span2">
                       <option value=""selected="selected">(month)</option>
                       <option>Jan</option><option>Feb</option>
                       <option>Mar</option><option>Apr</option>
@@ -165,27 +165,6 @@
         <div id="currentrequests" class="tab-pane">
           <h1>Current Requests</h1>
           <hr>
-            <!--
-            <?php
-              $query = "
-              SELECT name, time
-              FROM Meeting, PersonAttendingMeeting
-              WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid
-              "; 
-              $query_params = array( 
-              ':pid' => $_SESSION['Person']['pid']
-              ); 
-          
-              try{ 
-                 $stmt = $db->prepare($query); 
-                 $result = $stmt->execute($query_params); 
-              } 
-              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-  
-              echo $result
-              //$row = $stmt->fetch(); 
-            ?>
-            -->
             <h2>Current Requests table goes here</h2>
                
         </div>
@@ -194,7 +173,6 @@
           <h1>Pending Requests</h1>
           <hr>
             <h2>Pending Requests table goes here</h2>
-
 
             <table class="table table-striped">
               <thead>
@@ -226,13 +204,15 @@
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . date("g:i a \on F j, Y",$row['time']) . '</td>';
+                    echo '<td>' . $row['time'] . '</td>';
                   }
                 ?>
               </tbody>
             </table>
 
+            
 
+ 
         </div>
 
         <div id="pastrequests" class="tab-pane">

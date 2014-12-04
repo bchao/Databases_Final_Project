@@ -67,8 +67,8 @@
         <div id="requeststatus" class="tab-pane active">
           <h1>Request made!</h1>
           <hr>
-          <h2>Return to main page</h2>
-          <li><a href="hub.php">Return Home</a></li>
+        </br >
+          <a class="btn btn-primary btn-lg btn-block" type="button" href="hub.php">Return Home</a>
         </div>
     </div>
   </div>
