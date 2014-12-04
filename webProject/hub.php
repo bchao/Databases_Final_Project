@@ -177,9 +177,9 @@
                 <?php
                  $query = "
                   SELECT name, time_slot_date, time_slot_time
-                  FROM Meeting, PersonAttendingMeeting, Topic, Timeslot
+                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
                   WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
-                    AND meeting_time = Timeslot.tsid
+                    AND meeting_time = TimeSlot.tsid
                   "; 
                   $query_params = array( 
                   ':pid' => $_SESSION['Person']['pid']
