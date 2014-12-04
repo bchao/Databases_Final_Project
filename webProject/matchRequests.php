@@ -4,32 +4,32 @@
 	//matchRequests();
 
 	//function matchRequests(){
-		// $topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
-		$topics_query = $db -> prepare('SELECT DISTINCT topid FROM Topic');
-		$topics_query->execute();
+	// $topics_query = mysql_query("SELECT DISTINCT topid FROM Topic;");
+	$topics_query = $db -> prepare('SELECT DISTINCT topid FROM Topic');
+	$topics_query->execute();
 
-		$topics = array();
-		// $array = $topics_query -> fetchAll();
-		// // print_r($array);
-		// //echo 'topics_query: ' . print_r($topics_query->fetch()) . ' ';
+	$topics = array();
+	// $array = $topics_query -> fetchAll();
+	// // print_r($array);
+	// //echo 'topics_query: ' . print_r($topics_query->fetch()) . ' ';
 
-		// foreach ($array as $line) {
-		// 	$topics[] = $line['topid'];
-		// }
-		//set sizes of groups
-		$GROUP_SIZES = array('large','medium','small');
+	// foreach ($array as $line) {
+	// 	$topics[] = $line['topid'];
+	// }
+	//set sizes of groups
+	$GROUP_SIZES = array('large','medium','small');
 
-		while($line = $topics_query -> fetch()){
-			// while($line = mysql_fetch_row($topics_query)){
-			$topics[] = $line['topid'];
+	while($line = $topics_query -> fetch()){
+		// while($line = mysql_fetch_row($topics_query)){
+		$topics[] = $line['topid'];
+	}
+
+	foreach($topics as $topic){
+		foreach($GROUP_SIZES as $group_size){
+			// echo 'topic: ' . print_r($topic) . ' ';
+			matchRequestsForTopicAndSize($topic, $group_size, $db);
 		}
-
-		foreach($topics as $topic){
-			foreach($GROUP_SIZES as $group_size){
-				// echo 'topic: ' . print_r($topic) . ' ';
-				matchRequestsForTopicAndSize($topic, $group_size, $db);
-			}
-		}
+	}
 	//}
 
 	//matches up requests for specified topic and size
@@ -123,6 +123,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
@@ -136,6 +137,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
@@ -149,6 +151,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open')
+									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
