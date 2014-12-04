@@ -163,9 +163,8 @@
         </div>
 
         <div id="currentrequests" class="tab-pane">
-          <h1>Scheduled Meetings</h1>
+          <h1>Current Requests</h1>
           <hr>
-            <h2>Scheduled Meetings table goes here</h2>
             <!--
             <?php
               $query = "
@@ -187,6 +186,8 @@
               //$row = $stmt->fetch(); 
             ?>
             -->
+            <h2>Current Requests table goes here</h2>
+               
         </div>
 
         <div id="pendingrequests" class="tab-pane">
@@ -194,26 +195,42 @@
           <hr>
             <h2>Pending Requests table goes here</h2>
 
-            <?php
-              $query = "
-              SELECT name, time
-              FROM Request, Topic
-              WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
-              "; 
-              $query_params = array( 
-              ':pid' => $_SESSION['Person']['pid']
-              ); 
-          
-              try{ 
-                 $stmt = $db->prepare($query); 
-                 $result = $stmt->execute($query_params); 
-              } 
-              catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-  
-              $row = $stmt->fetch();
-              echo $row['name'];
-              $today = date("g:i a \on F j, Y",$row['time']);
-            ?>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                  $query = "
+                    SELECT name, time
+                    FROM Request, Topic
+                    WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+                    "; 
+
+                  $query_params = array( 
+                    ':pid' => $_SESSION['Person']['pid']
+                  ); 
+               
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . date("g:i a \on F j, Y",$row['time']) . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
 
 
         </div>
