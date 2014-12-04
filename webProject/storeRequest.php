@@ -46,33 +46,50 @@
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-	$groupSize = $_POST['group'];
-	if(strcmp($groupSize, "small group") == 0) {
-		$small = true;
-		$med = false;
-		$large = false;
-	}
-	else if(strcmp($groupSize, "medium group") == 0) {
-		$small = false;
-		$med = true;
-		$large = false;
-	}
-	else {
-		$small = false;
-		$med = false;
-		$large = true;
+
+
+
+	if(strcmp($_POST['smallGroupOk'],"yes") == 0) {
+		$small=true;
 	}
 
-	$rows = $db -> prepare('Select * FROM Request');
-	$rows->execute();
-	$count = $rows->rowCount();
+	if(strcmp($_POST['mediumGroupOk'],"yes") == 0) {
+		$medium=true;
+	}
+
+	if(strcmp($_POST['largeGroupOk'],"yes") == 0) {
+		$large=true;
+	}
+
+	// $groupSize = $_POST['group'];
+	// if(strcmp($groupSize, "small group") == 0) {
+	// 	$small = true;
+	// 	$med = false;
+	// 	$large = false;
+	// }
+	// else if(strcmp($groupSize, "medium group") == 0) {
+	// 	$small = false;
+	// 	$med = true;
+	// 	$large = false;
+	// }
+	// else {
+	// 	$small = false;
+	// 	$med = false;
+	// 	$large = true;
+	// }
+
+
+	//Don't need this with autoincrementing
+	// $rows = $db -> prepare('Select * FROM Request');
+	// $rows->execute();
+	// $count = $rows->rowCount();
 
 	$query = "
 		INSERT INTO Request 
-		VALUE(:count, :pid, :topid, :large, :med, :small, :curtime, 'open')
+		VALUE(:pid, :topid, :large, :med, :small, :curtime, 'open')
 	";
 	$query_params = array(
-		':count' => $count,
+		//':count' => $count,
 		':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
 		':topid' => $mytopid,
 		':large' => $large,
@@ -89,12 +106,16 @@
 
 	// mysql_query("INSERT INTO Request VALUE('', '$my_pid', '$mytopid', '$large', '$med', '$small', '$curtime', 'open')") or die(mysql_error());
 
+	//not 100% sure this will work like I think it's supposed to
+	$stmt = $db->query('LAST_INSERT_ID()');
+	$rid = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 	$query = "
 		INSERT INTO RequestTimes
-		VALUE(:count, :tsid)
+		VALUE(:rid, :tsid)
 	";
 	$query_params = array(
-		':count' => $count,
+		':rid' => $rid,
 		':tsid' => $tsid
 	);
 
