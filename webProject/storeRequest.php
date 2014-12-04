@@ -50,15 +50,15 @@
 
 
 	if(strcmp($_POST['smallGroupOk'],"yes") == 0) {
-		$small=true
+		$small=true;
 	}
 
 	if(strcmp($_POST['mediumGroupOk'],"yes") == 0) {
-		$medium=true
+		$medium=true;
 	}
 
 	if(strcmp($_POST['largeGroupOk'],"yes") == 0) {
-		$large=true
+		$large=true;
 	}
 
 	// $groupSize = $_POST['group'];
