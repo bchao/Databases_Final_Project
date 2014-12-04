@@ -106,12 +106,16 @@
 
 	// mysql_query("INSERT INTO Request VALUE('', '$my_pid', '$mytopid', '$large', '$med', '$small', '$curtime', 'open')") or die(mysql_error());
 
+	//not 100% sure this will work like I think it's supposed to
+	$stmt = $db->query('LAST_INSERT_ID()');
+	$rid = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 	$query = "
 		INSERT INTO RequestTimes
-		VALUE(:count, :tsid)
+		VALUE(:rid, :tsid)
 	";
 	$query_params = array(
-		':count' => $count,
+		':rid' => $rid,
 		':tsid' => $tsid
 	);
 
