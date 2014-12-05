@@ -4,10 +4,11 @@
     if(!empty($_POST)){ 
         $query = "
             SELECT
-              first_name,
-              last_name,
-              password,
-              email
+                pid,
+                first_name,
+                last_name,
+                password,
+                email
             FROM Person
             WHERE
               email = :email

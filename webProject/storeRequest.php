@@ -47,7 +47,9 @@
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
 
-
+	$small=false;
+	$medium=false;
+	$large=false;
 
 	if(strcmp($_POST['smallGroupOk'],"yes") == 0) {
 		$small=true;
@@ -85,15 +87,24 @@
 	// $count = $rows->rowCount();
 
 	$query = "
-		INSERT INTO Request 
-		VALUE(:pid, :topid, :large, :med, :small, :curtime, 'open')
+		INSERT INTO Request (
+			pid,
+			topid,
+			large_group_ok,
+			medium_group_ok,
+			small_group_ok,
+			time,
+			status
+		) VALUES (
+			:pid, :topid, :large, :med, :small, :curtime, 'open'
+		)
 	";
 	$query_params = array(
 		//':count' => $count,
 		':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
 		':topid' => $mytopid,
 		':large' => $large,
-		':med' => $med,
+		':med' => $medium,
 		':small' => $small,
 		':curtime' => $curtime
 	);
@@ -111,7 +122,7 @@
 	$rid = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	$query = "
-		INSERT INTO RequestTimes
+		INSERT INTO RequestTimes 
 		VALUE(:rid, :tsid)
 	";
 	$query_params = array(
