@@ -61,8 +61,8 @@
 <div class="container hero-unit">
   <div class="row tabbable well" role="tabpanel">
     <div class="col-md-3 fixme">
-      <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
-      <h2>Welcome, <?php echo $_SESSION['Person']['first_name']; ?>!</h2>
+      <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['first_name'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
+      <h2>Welcome, <?php echo $_SESSION['Person']['first_namef']; ?>!</h2>
       <hr>
       <h4>Navigation</h4>
       <!-- Nav tabs -->
@@ -146,42 +146,16 @@
           <hr>Pending Requests</h1>
           <hr>
 
-            <table class="table table-striped table-hover">
-              <thead>
-                <tr class = "active">
-                  <td>name</td>
-                  <td>time</td>
-                </tr>
-              </thead>
-
-              <tbody>
-                <?php
-                  $query = "
-                    SELECT *
-                    FROM Request, Topic
-                    WHERE pid = :pid AND Request.topid = Topic.topid
-                    "; 
-
-                  $query_params = array( 
-                    ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
-                  ); 
-               
-                  try{ 
-                     $stmt = $db->prepare($query); 
-                     $result = $stmt->execute($query_params); 
-                  } 
-                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-
-                  while ($row = $stmt -> fetch()) {
-                    // Print out the contents of the entry 
-                    echo '<tr>';
-                    echo '<tr>';
-                    echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time'] . '</td>';
-                  }
-                ?>
-              </tbody>
-            </table>
+            <table class="table" data-url="dist/data1.json" data-height="299" data-click-to-select="true" data-select-item-name="radioName">
+    <thead>
+        <tr>
+            <th data-field="state" data-radio="true"></th>
+            <th data-field="id" data-align="right">Item ID</th>
+            <th data-field="name" data-align="center">Item Name</th>
+            <th data-field="price" data-align="left">Item Price</th>
+        </tr>
+    </thead>
+</table>
 
           </hr>
         </div>
