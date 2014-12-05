@@ -7,214 +7,221 @@
     }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Study Buddies Hub Page</title>
-    <meta name="description" content="Hub Page">
+    <meta charset="UTF-8">
+    <title>Study Buddies</title>
+    <meta name="description" content="Home page">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="assets/bootstrap.min.js"></script>
-    <link href="assets/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
         body { background: url(assets/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
+        .block { background-color: #fff;
+          padding-left: 30px;
+          padding-top: 30px;
+          padding-right: 30px;
+          padding-bottom: 30px;}
 
         .fixme { position: fixed; }
         /* Landscape phone to portrait tablet */
         @media (max-width: 767px) {
           .fixme { width: 100%; position: static; }
-        }    </style>
-</head>
+        }    
+    </style>
 
 <body>
 
-<div class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand">Study Buddies</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li><a href="register.php">Register</a></li>
-          <li class="divider-vertical"></li>
-          <li><a href="Logout.php">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="navbar navbar-static-top" role="navigation">
+    <nav role="navigation" class="navbar navbar-default navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Study Buddies</a>
+        </div>
+
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="register.php">Register</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div class="container hero-unit">
-  <div class="row tabbable">
-    <div class="span3 fixme">
+  <div class="row tabbable well" role="tabpanel">
+    <div class="col-md-3 fixme">
       <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['first_name'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
       <hr>
       <h4>Navigation</h4>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#createrequest" data-toggle="tab">Create Request</a></li>
-        <li><a href="#currentrequests" data-toggle="tab">Current Requests</a></li>
-        <li><a href="#pendingrequests" data-toggle="tab">Pending Requests</a></li>
-        <li><a href="#pastrequests" data-toggle="tab">Past Requests</a></li>
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills nav-stacked" role="tablist">
+        <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
+        <li role="presentation"><a href="#topics" aria-controls="topics" role="tab" data-toggle="tab">Topics</a></li>
+        <li role="presentation"><a href="#currentrequests" aria-controls="currentrequests" role="tab" data-toggle="tab">Current Requests</a></li>
+        <li role="presentation"><a href="#pendingrequests" aria-controls="pendingrequests" role="tab" data-toggle="tab">Pending Requests</a></li>
+        <li role="presentation"><a href="#pastrequests" aria-controls="pastrequests" role="tab" data-toggle="tab">Past Requests</a></li>
       </ul>
     </div>
 
-    <div class="span8 well pull-right">
+    <div class="col-md-offset-4 block">
+      <!-- Tab panes -->
       <div class="tab-content">
-        <div id="createrequest" class="tab-pane active">
-          <h1>Create a New Request</h1>
+        <div role="tabpanel" class="tab-pane active" id="create">
+          <h1>Create New Request</h1>
           <hr>
-            <h2>New Request stuff goes here</h2>
-            <form class="form-horizontal" method="post" action="storeRequest.php">
-              <fieldset>
+                      
+          <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
 
-                <!-- topic select -->
-                <div class="control-group">
-                  <label class="control-label">Topic</label>
-                  <div class="controls">
-                    <select id="topic" name="topic" class="span3">
-                      <option value=""selected="selected">(please select a topic)</option>
-                      <option>Math</option>
-                      <option>History</option>
-                      <option>Art</option>
-                      <option>Etc</option>
-                    </select>
-                  </div>
-                </div>
+            <div class="form-group">
+              <label for="topic" class="col-sm-3 control-label">Topic</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="topic" name="topic">
+                  <option value=""selected="selected">(please select a topic)</option>
 
-                <!-- date select -->
-                <div class="control-group">
-                  <label class="control-label">Date</label>
-                  <div class="controls">
-                    <select id="month" name="month" class="span2">
-                      <option value=""selected="selected">(month)</option>
-                      <option>Jan</option><option>Feb</option>
-                      <option>Mar</option><option>Apr</option>
-                      <option>May</option><option>Jun</option>
-                      <option>Jul</option><option>Aug</option>
-                      <option>Sep</option><option>Oct</option>
-                      <option>Nov</option><option>Dec</option>
-                    </select>
+                  <?php
+                    $query = "SELECT * FROM Topic";
+                    try{
+                      $stmt = $db->prepare($query);
+                      $result = $stmt->execute();
+                    }
+                    catch(PDOException $ex) {die("Failed to get Topics: " . $ex->getMessage()); }
 
-                    <select id="day" name="day" class="span1">
-                      <option value=""selected="selected">(day)</option>
-                      <option>01</option><option>02</option>
-                      <option>03</option><option>04</option>
-                      <option>05</option><option>06</option>
-                      <option>07</option><option>08</option>
-                      <option>09</option><option>10</option>
-                      <option>11</option><option>12</option>
-                      <option>13</option><option>14</option>
-                      <option>15</option><option>16</option>
-                      <option>17</option><option>18</option>
-                      <option>19</option><option>20</option>
-                      <option>21</option><option>22</option>
-                      <option>23</option><option>24</option>
-                      <option>25</option><option>26</option>
-                      <option>27</option><option>28</option>
-                      <option>29</option><option>30</option>
-                      <option>31</option>
-                    </select>
+                    while($row = $stmt -> fetch()) {
+                      echo "<option value=$row[name]>$row[name]</option>";
+                    }
+                  ?>
 
-                    <select id="year" name="year" class="span1">
-                      <option value=""selected="selected">(year)</option>
-                      <option>2014</option><option>2015</option>
-                      <option>2016</option><option>2017</option>
-                    </select>
-                  </div>
-                </div>
-                
-                <!-- group preference select -->
-                <div class="control-group">
-                  <label class="control-label">Group Preference</label>
-                  <div class="controls">
-                    <select id="grouppref" name="grouppref" class="span3">
-                      <option value=""selected="selected">(please select a preference)</option>
-                      <option value="small">Small</option>
-                      <option value="medium">Medium</option>
-                      <option value="large">Large</option>
-                    </select>
-                  </div>
-                </div>
 
-                <!-- time select -->
-                <div class="control-group">
-                  <label class="control-label">Time</label>
-                  <div class="controls">
-                    <select id="time" name="time" class="span3">
-                      <option value=""selected="selected">(please select a time)</option>
-                      <option value="morning">Morning</option>
-                      <option value="afternooon">Afternoon</option>
-                      <option value="evening">Evening</option>
-                      <option value="night">Night</option>
-                      <option value="anyTime">Any Time</option>
-                    </select>
-                  </div>
-                </div> 
 
-              <td><input type="submit" name="Submit" value="Submit"></td>
-            </form>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="date" class="col-sm-3 control-label">Date</label>
+              <div class="col-md-6">
+                <input type="date" class="form-control" id="date">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topic" class="col-sm-3 control-label">Group Preference</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="grouppref" name="grouppref">
+                  <option value=""selected="selected">(please select a preference)</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topic" class="col-sm-3 control-label">Time</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="time" name="time">
+                  <option value=""selected="selected">(please select a time)</option>
+                    <option value="morning">Morning</option>
+                    <option value="afternooon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="night">Night</option>
+                    <option value="anyTime">Any Time</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
+
+          <br>
+          <br>
+          <h1>Create New Topic</h1>
+          <hr>
+
+          <form class="form-horizontal" method="post" action="storeTopic.php" role="form">
+
+            <div class="form-group">
+              <label for="topicName" class="col-sm-3 control-label">Topic</label>
+              <div class="col-md-6">
+                <input name="topicName" type="text" class="form-control" id="topicName">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topicDescription" class="col-sm-3 control-label">Description</label>
+              <div class="col-md-6">
+                <input name="topicDescription" type="text" class="form-control" id="topicDescription">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
+
         </div>
 
-        <div id="currentrequests" class="tab-pane">
-          <h1>Scheduled Meetings</h1>
+        <div role="tabpanel" class="tab-pane" id="topics">
+          <h1>Topics</h1>
           <hr>
-            <table class="table table-striped">
+
+            <table class="table table-striped table-hover">
               <thead>
-                <tr>
-                  <th>name</th>
-                  <th>time</th>
+                <tr class = "active">
+                  <td>Topic</td>
+                  <td>Description</td>
                 </tr>
               </thead>
 
               <tbody>
                 <?php
-                 $query = "
-                  SELECT name, time_slot_date, time_slot_time
-                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
-                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
-                    AND meeting_time = TimeSlot.tsid AND time_slot_date >= :currentDate
-                  "; 
-                  $query_params = array( 
-                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
-                  ':currentDate' => date("Y-m-d",time())
-                  ); 
-              
+                  $query = "
+                    SELECT name, description
+                    FROM Topic
+                    "; 
+               
                   try{ 
                      $stmt = $db->prepare($query); 
                      $result = $stmt->execute($query_params); 
                   } 
                   catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-      
- 
+
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
+                    echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time_slot_time'] . ' on ' . $row['time_slot_date'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
                   }
                 ?>
               </tbody>
             </table>
-               
+
+          </hr>
         </div>
 
-        <div id="pendingrequests" class="tab-pane">
+        <div role="tabpanel" class="tab-pane" id="currentrequests">
+          <h1>Current Requests</h1>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
-          <hr>
-<ul class="list-group">
-  <li class="list-group-item">Cras justo odio</li>
-  <li class="list-group-item">Dapibus ac facilisis in</li>
-  <li class="list-group-item">Morbi leo risus</li>
-  <li class="list-group-item">Porta ac consectetur ac</li>
-  <li class="list-group-item">Vestibulum at eros</li>
-</ul>
           <hr>
 
             <table class="table table-striped table-hover">
@@ -230,7 +237,7 @@
                   $query = "
                     SELECT name, time
                     FROM Request, Topic
-                    WHERE pid = :pid AND Request.topid = Topic.topid AND status = 'open'
+                    WHERE Request.topid = Topic.topid
                     "; 
 
                   $query_params = array( 
@@ -254,73 +261,17 @@
               </tbody>
             </table>
 
-            
-
- 
+          </hr>
         </div>
-
-                <div id="pastrequests" class="tab-pane">
-          <h1>Past Meetings</h1>
-          <hr>
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>name</th>
-                  <th>time</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <?php
-                 $query = "
-                  SELECT name, time_slot_date, time_slot_time
-                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
-                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
-                    AND meeting_time = TimeSlot.tsid AND time_slot_date < :currentDate
-                  "; 
-                  $query_params = array( 
-                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
-                  ':currentDate' => date("Y-m-d",time())
-                  ); 
-              
-                  try{ 
-                     $stmt = $db->prepare($query); 
-                     $result = $stmt->execute($query_params); 
-                  } 
-                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
-      
- 
-                  while ($row = $stmt -> fetch()) {
-                    // Print out the contents of the entry 
-                    echo '<tr>';
-                    echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time_slot_time'] . ' on ' . $row['time_slot_date'] . '</td>';
-                  }
-                ?>
-              </tbody>
-            </table>
-        </div>        
+        <div role="tabpanel" class="tab-pane" id="pastrequests">
+          <h1>Past Requests</h1>
+        </div>
       </div>
     </div>
+    </div>
+
   </div>
 </div>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
