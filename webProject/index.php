@@ -108,7 +108,7 @@
     <ul>
         <li>Create a new user with the <strong>Register</strong> button in the navbar.</li>
         <li>Use the default credentials for testing:<br />
-            <strong>email:</strong> test@gmail.com<br />
+            <strong>email:</strong> lenny@gmail.com<br />
             <strong>pass:</strong> password<br /></li>
     </ul>
 

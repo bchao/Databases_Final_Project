@@ -66,7 +66,8 @@
       <h4>Navigation</h4>
       <!-- Nav tabs -->
       <ul class="nav nav-pills nav-stacked" role="tablist">
-        <li role="presentation" class="active"><a href="#createrequest" aria-controls="createrequests" role="tab" data-toggle="tab">Create Requests</a></li>
+        <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
+        <li role="presentation"><a href="#topics" aria-controls="topics" role="tab" data-toggle="tab">Topics</a></li>
         <li role="presentation"><a href="#currentrequests" aria-controls="currentrequests" role="tab" data-toggle="tab">Current Requests</a></li>
         <li role="presentation"><a href="#pendingrequests" aria-controls="pendingrequests" role="tab" data-toggle="tab">Pending Requests</a></li>
         <li role="presentation"><a href="#pastrequests" aria-controls="pastrequests" role="tab" data-toggle="tab">Past Requests</a></li>
@@ -76,8 +77,8 @@
     <div class="col-md-offset-4 block">
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="createrequest">
-          <h1>Create a New Request</h1>
+        <div role="tabpanel" class="tab-pane active" id="create">
+          <h1>Create New Request</h1>
           <hr>
                       
           <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
@@ -147,14 +148,80 @@
             </div>
           </form>
 
+          <br>
+          <br>
+          <h1>Create New Topic</h1>
+          <hr>
 
+          <form class="form-horizontal" method="post" action="storeTopic.php" role="form">
+
+            <div class="form-group">
+              <label for="topicName" class="col-sm-3 control-label">Topic</label>
+              <div class="col-md-6">
+                <input name="topicName" type="text" class="form-control" id="topicName">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topicDescription" class="col-sm-3 control-label">Description</label>
+              <div class="col-md-6">
+                <input name="topicDescription" type="text" class="form-control" id="topicDescription">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
 
         </div>
+
+        <div role="tabpanel" class="tab-pane" id="topics">
+          <h1>Topics</h1>
+          <hr>
+
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr class = "active">
+                  <td>Topic</td>
+                  <td>Description</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                  $query = "
+                    SELECT name, description
+                    FROM Topic
+                    "; 
+               
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['description'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
+
+          </hr>
+        </div>
+
         <div role="tabpanel" class="tab-pane" id="currentrequests">
-          <hr>Current Requests</h1>
+          <h1>Current Requests</h1>
         </div>
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
-          <hr>Pending Requests</h1>
+          <h1>Pending Requests</h1>
           <hr>
 
             <table class="table table-striped table-hover">
@@ -197,7 +264,7 @@
           </hr>
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
-          <hr>Past Requests</h1>
+          <h1>Past Requests</h1>
         </div>
       </div>
     </div>

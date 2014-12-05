@@ -46,20 +46,17 @@
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-
 	$small=false;
 	$medium=false;
 	$large=false;
 
-	if(strcmp($_POST['smallGroupOk'],"yes") == 0) {
+	if(strcmp($_POST['grouppref'],"Small") == 0) {
 		$small=true;
 	}
-
-	if(strcmp($_POST['mediumGroupOk'],"yes") == 0) {
+	if(strcmp($_POST['grouppref'],"Medium") == 0) {
 		$medium=true;
 	}
-
-	if(strcmp($_POST['largeGroupOk'],"yes") == 0) {
+	if(strcmp($_POST['grouppref'],"Large") == 0) {
 		$large=true;
 	}
 
@@ -118,15 +115,15 @@
 	// mysql_query("INSERT INTO Request VALUE('', '$my_pid', '$mytopid', '$large', '$med', '$small', '$curtime', 'open')") or die(mysql_error());
 
 	//not 100% sure this will work like I think it's supposed to
-	$stmt = $db->query('LAST_INSERT_ID()');
-	$rid = $stmt->fetchAll(PDO::FETCH_ASSOC);
+	$stmt = $db->query('SELECT rid FROM Request ORDER BY rid DESC LIMIT 1');
+	$rid = $stmt->fetch();
 
 	$query = "
 		INSERT INTO RequestTimes 
 		VALUE(:rid, :tsid)
 	";
 	$query_params = array(
-		':rid' => $rid,
+		':rid' => $rid['rid'],
 		':tsid' => $tsid
 	);
 

@@ -7,72 +7,82 @@
     }
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Study Buddies Hub Page</title>
-    <meta name="description" content="Hub Page">
+    <meta charset="UTF-8">
+    <title>Study Buddies</title>
+    <meta name="description" content="Home page">
 
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="dist/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
     <style type="text/css">
-        body { background: url(dist/bglight.png); }
+        body { background: url(assets/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
+        .block { background-color: #fff;
+          padding-left: 30px;
+          padding-top: 30px;
+          padding-right: 30px;
+          padding-bottom: 30px;}
 
         .fixme { position: fixed; }
         /* Landscape phone to portrait tablet */
         @media (max-width: 767px) {
           .fixme { width: 100%; position: static; }
-        }    </style>
-</head>
+        }    
+    </style>
 
 <body>
 
-<div class="navbar navbar-fixed-top navbar-inverse">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-      <a class="brand">Study Buddies</a>
-      <div class="nav-collapse">
-        <ul class="nav pull-right">
-          <li><a href="register.php">Register</a></li>
-          <li class="divider-vertical"></li>
-          <li><a href="Logout.php">Log Out</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
+<div class="navbar navbar-static-top" role="navigation">
+    <nav role="navigation" class="navbar navbar-default navbar-inverse">
+        <div class="navbar-header">
+            <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand">Study Buddies</a>
+        </div>
+
+        <div id="navbarCollapse" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="register.php">Register</a></li>
+                <li class="divider-vertical"></li>
+                <li><a href="Logout.php">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
 
 <div class="container hero-unit">
-  <div class="row tabbable">
-    <div class="span3 fixme">
+  <div class="row tabbable well" role="tabpanel">
+    <div class="col-md-3 fixme">
       <h2>Welcome, <?php echo htmlentities($_SESSION['Person']['first_name'], ENT_QUOTES, 'UTF-8'); ?>!</h2>
       <hr>
       <h4>Navigation</h4>
-      <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#requeststatus" data-toggle="tab">Request Status</a></li>
+      <!-- Nav tabs -->
+      <ul class="nav nav-pills nav-stacked" role="tablist">
+        <li role="presentation" class="active"><a href="#createrequest" aria-controls="requeststatus" role="tab" data-toggle="tab">Request Status</a></li>
       </ul>
     </div>
 
-    <div class="span8 well pull-right">
+    <div class="col-md-offset-4 block">
       <div class="tab-content">
         <div id="requeststatus" class="tab-pane active">
           <h1>Request made!</h1>
           <hr>
         </br >
-          <a class="btn btn-primary btn-lg btn-block" type="button" href="hub.php">Return Home</a>
+          <a class="btn btn-primary btn-lg btn-block" type="button" href="hub2.php">Return Home</a>
         </div>
     </div>
   </div>
 </div>
+
+
 
 </body>
 </html>
