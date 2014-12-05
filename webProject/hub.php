@@ -227,8 +227,8 @@
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
-                  <td>name</td>
-                  <td>time</td>
+                  <td>Topic</td>
+                  <td>Time at Request</td>
                 </tr>
               </thead>
 
@@ -237,7 +237,7 @@
                   $query = "
                     SELECT name, time
                     FROM Request, Topic
-                    WHERE Request.topid = Topic.topid
+                    WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
                     "; 
 
                   $query_params = array( 
