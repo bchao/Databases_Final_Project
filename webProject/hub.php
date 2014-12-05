@@ -68,7 +68,7 @@
       <ul class="nav nav-pills nav-stacked" role="tablist">
         <li role="presentation" class="active"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
         <li role="presentation"><a href="#topics" aria-controls="topics" role="tab" data-toggle="tab">Topics</a></li>
-        <li role="presentation"><a href="#currentrequests" aria-controls="currentrequests" role="tab" data-toggle="tab">Current Requests</a></li>
+        <li role="presentation"><a href="#scheduledmeetings" aria-controls="scheduledmeetings" role="tab" data-toggle="tab">Scheduled Meetings</a></li>
         <li role="presentation"><a href="#pendingrequests" aria-controls="pendingrequests" role="tab" data-toggle="tab">Pending Requests</a></li>
         <li role="presentation"><a href="#pastrequests" aria-controls="pastrequests" role="tab" data-toggle="tab">Past Requests</a></li>
       </ul>
@@ -217,8 +217,8 @@
           </hr>
         </div>
 
-        <div role="tabpanel" class="tab-pane" id="currentrequests">
-          <h1>Current Requests</h1>
+        <div role="tabpanel" class="tab-pane" id="scheduledmeetings">
+          <h1>Scheduled Meetings</h1>
         </div>
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
