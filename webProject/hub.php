@@ -87,8 +87,6 @@
               <label for="topic" class="col-sm-3 control-label">Topic</label>
               <div class="col-sm-10 col-md-6">
                 <select class="form-control" id="topic" name="topic">
-                  <option value=""selected="selected">(please select a topic)</option>
-
                   <?php
                     $query = "SELECT * FROM Topic";
                     try{
@@ -116,10 +114,9 @@
               <label for="topic" class="col-sm-3 control-label">Group Preference</label>
               <div class="col-sm-10 col-md-6">
                 <select class="form-control" id="grouppref" name="grouppref">
-                  <option value=""selected="selected">(please select a preference)</option>
-                  <option>Small</option>
-                  <option>Medium</option>
-                  <option>Large</option>
+                  <option value="Small">Small (2-3)</option>
+                  <option value="Medium">Medium (4-6)</option>
+                  <option value="Large">Large (7+)</option>
                 </select>
               </div>
             </div>
@@ -128,12 +125,10 @@
               <label for="topic" class="col-sm-3 control-label">Time</label>
               <div class="col-sm-10 col-md-6">
                 <select class="form-control" id="time" name="time">
-                  <option value=""selected="selected">(please select a time)</option>
                     <option value="morning">Morning</option>
                     <option value="afternooon">Afternoon</option>
                     <option value="evening">Evening</option>
                     <option value="night">Night</option>
-                    <option value="anyTime">Any Time</option>
                 </select>
               </div>
             </div>

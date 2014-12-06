@@ -102,16 +102,12 @@
 </div>
 
 <div class="container hero-unit">
-
-<h1>Please register or log in!</h1>
-    <p>You can't do anything until you register and log in.</p>
-    <ul>
-        <li>Create a new user with the <strong>Register</strong> button in the navbar.</li>
-        <li>Use the default credentials for testing:<br />
-            <strong>email:</strong> lenny@gmail.com<br />
-            <strong>pass:</strong> password<br /></li>
-    </ul>
-
+<center>
+<h1>Welcome to Study Buddies!</h1>
+    <p>Study Buddies helps you find other students to work and collaborate with.</p>
+    <br>
+    <p><strong>Login</strong> or <strong>Register</strong> to get started!</p>
+</center>
 </div>
 
 
