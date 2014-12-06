@@ -73,7 +73,7 @@
     <div class="col-md-offset-4 block">
       <div class="tab-content">
         <div id="requeststatus" class="tab-pane active">
-          <h1>Request made!</h1>
+          <h1>Topic added!</h1>
           <hr>
         </br >
           <a class="btn btn-primary btn-lg btn-block" type="button" href="hub.php">Return Home</a>
