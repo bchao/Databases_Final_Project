@@ -21,10 +21,7 @@
 	$mytopid = $row['topid'];
 	// echo $mytopid;
 
-	$month = $_POST['month'];
-	$day = $_POST['day'];
-	$year = $_POST['year'];
-	$mydate = $month . $day . $year;
+	$mydate = $_POST['date'];
 	// echo $mydate;
 
 	$mytime=$_POST['time'];
@@ -124,7 +121,7 @@
 	";
 	$query_params = array(
 		':rid' => $rid['rid'],
-		':tsid' => $tsid
+		':tsid' => $tsid['tsid']
 	);
 
 	try{

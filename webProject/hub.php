@@ -98,18 +98,15 @@
                     catch(PDOException $ex) {die("Failed to get Topics: " . $ex->getMessage()); }
 
                     while($row = $stmt -> fetch()) {
-                      echo "<option value=$row[name]>$row[name]</option>";
+                      echo "<option>$row[name]</option>";
                     }
                   ?>
-
-
-
                 </select>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="date" class="col-sm-3 control-label">Date</label>
+              <label name="date" for="date" class="col-sm-3 control-label">Date</label>
               <div class="col-md-6">
                 <input type="date" class="form-control" id="date">
               </div>
@@ -219,7 +216,46 @@
 
         <div role="tabpanel" class="tab-pane" id="scheduledmeetings">
           <h1>Scheduled Meetings</h1>
+
+          <hr>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                 $query = "
+                  SELECT name, time_slot_date, time_slot_time
+                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
+                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
+                    AND meeting_time = TimeSlot.tsid AND time_slot_date >= NOW()
+                  "; 
+                  $query_params = array( 
+                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                  ); 
+              
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+      
+ 
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
         </div>
+
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
           <hr>
@@ -265,6 +301,44 @@
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
           <h1>Past Requests</h1>
+          <hr>
+
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Topic</th>
+                  <th>Time</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <?php
+                 $query = "
+                  SELECT name, time_slot_date, time_slot_time
+                  FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
+                  WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
+                    AND meeting_time = TimeSlot.tsid AND time_slot_date < NOW()
+                  "; 
+                  $query_params = array( 
+                  ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                  ); 
+              
+                  try{ 
+                     $stmt = $db->prepare($query); 
+                     $result = $stmt->execute($query_params); 
+                  } 
+                  catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
+      
+ 
+                  while ($row = $stmt -> fetch()) {
+                    // Print out the contents of the entry 
+                    echo '<tr>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
+                  }
+                ?>
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
