@@ -22,5 +22,5 @@
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-    header("Location: requestSuccess.php"); 
+    header("Location: topicSuccess.php"); 
 ?>

@@ -35,8 +35,8 @@
 	//matches up requests for specified topic and size
 	function matchRequestsForTopicAndSize($topic, $group_size, $db){
 
-		$MIN_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 11);
-		$MAX_GROUP_SIZE = array('small' => 5, 'medium' => 10, 'large' => 50);
+		$MIN_GROUP_SIZE = array('small' => 2, 'medium' => 4, 'large' => 7);
+		$MAX_GROUP_SIZE = array('small' => 3, 'medium' => 6, 'large' => 50);
 
 		//echo 'topic: ' . print_r($topic) . ' ';
 
