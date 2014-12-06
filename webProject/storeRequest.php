@@ -39,9 +39,44 @@
 
 	try {
 		$stmt = $db->prepare($query);
-		$tsid = $stmt->execute($query_params);
+		$result = $stmt->execute($query_params);
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
+	if(empty($stmt)) {
+		$query = "
+			INSERT INTO TimeSlot(time_slot_date, time_slot_time)
+			VALUE(:date, :time)";
+
+		$query_params = array(
+			':date' => $mydate,
+			':time' => $mytime
+		);
+
+		try {
+			$stmt = $db->prepare($query);
+			$result = $stmt->execute($query_params);
+		}
+		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
+		$query = "
+			SELECT tsid
+			FROM TimeSlot
+			WHERE time_slot_date=:date AND time_slot_time=:time
+		";
+		$query_params = array(
+			':date' => $mydate,
+			':time' => $mytime
+		);
+
+		try {
+			$stmt = $db->prepare($query);
+			$result = $stmt->execute($query_params);
+		}
+		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+	}
+
+	$tsid = $stmt -> fetch();
 
 	$small=false;
 	$medium=false;
@@ -136,22 +171,3 @@
 
     header("Location: requestSuccess.php"); 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
