@@ -19,10 +19,8 @@
 
 	$row = $stmt ->fetch();
 	$mytopid = $row['topid'];
-	// echo $mytopid;
 
 	$mydate = $_POST['date'];
-	// echo $mydate;
 
 	$mytime=$_POST['time'];
 	$curtime = time();
@@ -43,39 +41,6 @@
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-	if(empty($stmt)) {
-		$query = "
-			INSERT INTO TimeSlot(time_slot_date, time_slot_time)
-			VALUE(:date, :time)";
-
-		$query_params = array(
-			':date' => $mydate,
-			':time' => $mytime
-		);
-
-		try {
-			$stmt = $db->prepare($query);
-			$result = $stmt->execute($query_params);
-		}
-		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
-
-		$query = "
-			SELECT tsid
-			FROM TimeSlot
-			WHERE time_slot_date=:date AND time_slot_time=:time
-		";
-		$query_params = array(
-			':date' => $mydate,
-			':time' => $mytime
-		);
-
-		try {
-			$stmt = $db->prepare($query);
-			$result = $stmt->execute($query_params);
-		}
-		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
-	}
-
 	$tsid = $stmt -> fetch();
 
 	$small=false;
@@ -91,29 +56,6 @@
 	if(strcmp($_POST['grouppref'],"Large") == 0) {
 		$large=true;
 	}
-
-	// $groupSize = $_POST['group'];
-	// if(strcmp($groupSize, "small group") == 0) {
-	// 	$small = true;
-	// 	$med = false;
-	// 	$large = false;
-	// }
-	// else if(strcmp($groupSize, "medium group") == 0) {
-	// 	$small = false;
-	// 	$med = true;
-	// 	$large = false;
-	// }
-	// else {
-	// 	$small = false;
-	// 	$med = false;
-	// 	$large = true;
-	// }
-
-
-	//Don't need this with autoincrementing
-	// $rows = $db -> prepare('Select * FROM Request');
-	// $rows->execute();
-	// $count = $rows->rowCount();
 
 	$query = "
 		INSERT INTO Request (
@@ -144,9 +86,6 @@
 	}
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-	// mysql_query("INSERT INTO Request VALUE('', '$my_pid', '$mytopid', '$large', '$med', '$small', '$curtime', 'open')") or die(mysql_error());
-
-	//not 100% sure this will work like I think it's supposed to
 	$stmt = $db->query('SELECT rid FROM Request ORDER BY rid DESC LIMIT 1');
 	$rid = $stmt->fetch();
 
@@ -163,9 +102,6 @@
 		$stmt = $db->prepare($query);
 		$stmt->execute($query_params);
 	}
-
-	// $rid = mysql_num_rows(mysql_query("SELECT * FROM Request;")) or die("cannot get request id");
-	// mysql_query("INSERT INTO RequestTimes VALUE('$rid', '$tsid')") or die(mysql_error());
 
 	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
