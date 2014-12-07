@@ -1,28 +1,10 @@
 <?php
 	require("config.php");
 
-	$query = "
-		SELECT topid 
-		FROM Topic 
-		WHERE name = :name
-	";
-	$query_params = array(
-		':name' => $_SESSION['currReq']['topic']
-	);
-
-	try{
-		$stmt = $db->prepare($query);
-		$result = $stmt->execute($query_params);
-	}
-	catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
-
-	$row = $stmt ->fetch();
-	$mytopid = $row['topid'];
-
 	$mydate = $_POST['date'];
-	$curtime = time();
 
 	$timeArr = $_POST['time'];
+	$myRid = $_SESSION['currReq']['rid'];
 
 	for($index = 0; $index < count($timeArr); $index++) {
 		$mytime = $timeArr[$index];
@@ -48,8 +30,7 @@
 			VALUE(:rid, :tsid)
 		";
 		$query_params = array(
-			// ':rid' => $rid['rid'],
-			':rid' => $_SESSION['currReq']['rid'],
+			':rid' => $myRid,
 			':tsid' => $tsid['tsid']
 		);
 
