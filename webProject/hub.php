@@ -268,7 +268,34 @@
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
           <hr>
+            <form class="form-horizontal" method="post" action="deleteRequest.php" role="form">
+              <div class="form-group">
+              <label for="request" class="col-sm-3 control-label">Topic</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="request" name="request">
+                  <?php
+                    $query = "
+                      SELECT rid
+                      FROM Request, Topic
+                      WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
+                      ";
+                    $query_params = array( 
+                      ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                     ); 
+                    try{
+                      $stmt = $db->prepare($query);
+                      $result = $stmt->execute();
+                    }
+                    catch(PDOException $ex) {die("Failed to get Requests: " . $ex->getMessage()); }
 
+                    while($row = $stmt -> fetch()) {
+                      echo "<option>$row[rid]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+            </form>
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
