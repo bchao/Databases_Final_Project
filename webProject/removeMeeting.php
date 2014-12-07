@@ -2,11 +2,12 @@
 	require("config.php");
 
 	$query = "
-			DELETE FROM Request
-			WHERE rid = :rid
+			DELETE FROM PersonAttendingMeeting
+			WHERE pid = :pid AND mid = :mid
 		";
 		$query_params = array(
-			':rid' => $_POST['rid']
+			':pid' => $_SESSION['Person']['pid'],
+			':mid' => $_Post['mid']
 		);
 
 		try{
