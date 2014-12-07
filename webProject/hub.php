@@ -285,7 +285,7 @@
           <hr>
             <form class="form-horizontal" method="post" action="deleteRequest.php" role="form">
               <div class="form-group">
-              <label for="rid" class="col-sm-3 control-label">Delete Request</label>
+              <label for="rid" class="col-sm-6 control-label">Delete Request</label>
               <div class="col-sm-10 col-md-6">
                 <select class="form-control" id="rid" name="rid">
                   <?php
