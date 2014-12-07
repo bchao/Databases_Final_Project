@@ -157,8 +157,8 @@
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
-                  <td>Topic</td>
-                  <td>Description</td>
+                  <th>Topic</th>
+                  <th>Description</th>
                 </tr>
               </thead>
 
@@ -286,9 +286,9 @@
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
-                  <td>Request ID</td>
-                  <td>Topic</td>
-                  <td>Time at Request</td>
+                  <th>Request ID</th>
+                  <th>Topic</th>
+                  <th>Time at Request</th>
                 </tr>
               </thead>
 
