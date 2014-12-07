@@ -19,7 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
-        body { background: url(assets/bglight.png); }
+        body { background: url(dist/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
         .block { background-color: #fff;
@@ -106,7 +106,7 @@
             <div class="form-group">
               <label name="date" for="date" class="col-sm-3 control-label">Date</label>
               <div class="col-md-6">
-                <input type="date" class="form-control" id="date">
+                <input multiple type="date" class="form-control" id="date">
               </div>
             </div>
 
@@ -124,7 +124,7 @@
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Time</label>
               <div class="col-sm-10 col-md-6">
-                <select class="form-control" id="time" name="time">
+                <select multiple class="form-control" id="time" name="time[]">
                     <option value="morning">Morning</option>
                     <option value="afternooon">Afternoon</option>
                     <option value="evening">Evening</option>
@@ -239,16 +239,30 @@
                   } 
                   catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
       
- 
+                  $num = 0;
+
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
+                    $num++;
                   }
                 ?>
               </tbody>
             </table>
+            <?php
+              if($num < 3) {
+                echo '<br><br>';
+                if($num == 0) {
+                  echo '<center>';
+                  echo '<p>You have no scheduled meetings</p>';
+                  echo '<p>Request meetings in the <strong>Create</strong> tab';
+                  echo '</center>';
+                }
+                echo '<br>';
+              }
+            ?>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
@@ -281,17 +295,31 @@
                   } 
                   catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
 
+                  $num = 0;
+
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time'] . '</td>';
+                    $num++;
                   }
                 ?>
               </tbody>
             </table>
-
+            <?php
+              if($num < 3) {
+                echo '<br><br>';
+                if($num == 0) {
+                  echo '<center>';
+                  echo '<p>You have no pending requests</p>';
+                  echo '<p>Request meetings in the <strong>Create</strong> tab';
+                  echo '</center>';
+                }
+                echo '<br>';
+              }
+            ?>
           </hr>
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
@@ -324,16 +352,30 @@
                   } 
                   catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); } 
       
- 
+                  $num = 0;
+
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
+                    $num++;
                   }
                 ?>
               </tbody>
             </table>
+            <?php
+              if($num < 3) {
+                echo '<br><br>';
+                if($num == 0) {
+                  echo '<center>';
+                  echo '<p>You have no past meetings</p>';
+                  echo '<p>Request meetings in the <strong>Create</strong> tab to get started';
+                  echo '</center>';
+                }
+                echo '<br>';
+              }
+            ?>
         </div>
       </div>
     </div>

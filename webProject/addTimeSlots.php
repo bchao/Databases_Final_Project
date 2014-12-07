@@ -2,7 +2,7 @@
  require("config.php");
 
  $date = '2014-12-06';
- $end_date = '2018-12-31';
+ $end_date = '2016-12-31';
 
  $times = array('morning', 'afternoon', 'evening', 'night');
  
@@ -10,7 +10,7 @@
 
  	foreach ($times as $time) {
  		$query = "
-		INSERT INTO TimeSlot 
+		INSERT INTO TimeSlot (time_slot_date, time_slot_time)
 		VALUE(:time_slot_date, :time_slot_time)
 		";
 		
@@ -27,6 +27,7 @@
  	}
 
  	$date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));
+ 	echo 'DONE!!';
  }
  
 ?>

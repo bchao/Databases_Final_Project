@@ -56,7 +56,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
-        body { background: url(assets/bglight.png); }
+        body { background: url(dist/bglight.png); }
         .hero-unit { background-color: #fff; }
         .center { display: block; margin: 0 auto; }
 
@@ -103,7 +103,10 @@
 
 <div class="container hero-unit">
 <center>
-<h1>Welcome to Study Buddies!</h1>
+    <br>
+    <br>
+    <img src="dist/logo.png" class="img-responsive" alt="Responsive image"></img>
+    <br>
     <p>Study Buddies helps you find other students to work and collaborate with.</p>
     <br>
     <p><strong>Login</strong> or <strong>Register</strong> to get started!</p>

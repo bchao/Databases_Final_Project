@@ -19,7 +19,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="dist/js/bootstrap.min.js"></script>
     <style type="text/css">
-        body { background: url(assets/bglight.png); }
+        body { background: url(dist/bglight.png); }
         .unit { background-color: #fff; }
         .well { background-color: #fff; }
         .block { background-color: #fff;
