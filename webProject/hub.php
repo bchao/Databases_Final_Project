@@ -193,6 +193,39 @@
           <h1>Scheduled Meetings</h1>
 
           <hr>
+            <form class="form-horizontal" method="post" action="removeMeeting.php" role="form">
+              <div class="form-group">
+              <label for="mid" class="col-sm-3 control-label">Delete Meeting</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="mid" name="mid">
+                  <?php
+                    $query = "
+                      SELECT mid
+                      FROM Meeting, PersonAttendingMeeting
+                      WHERE pid=:pid AND Meeting.mid = PersonAttendingMeeting.mid
+                      ";
+                    $query_params = array( 
+                      ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                     ); 
+                    try{
+                      $stmt = $db->prepare($query);
+                      $result = $stmt->execute($query_params);
+                    }
+                    catch(PDOException $ex) {die("Failed to get Meetings: " . $ex->getMessage()); }
+
+                    while($row = $stmt -> fetch()) {
+                      echo "<option>$row[mid]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Delete</button>
+              </div>
+            </div>
+            </form>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -250,7 +283,7 @@
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
           <hr>
-            <form class="form-inline" method="post" action="deleteRequest.php" role="form">
+            <form class="form-horizontal" method="post" action="deleteRequest.php" role="form">
               <div class="form-group">
               <label for="rid" class="col-sm-3 control-label">Delete Request</label>
               <div class="col-sm-10 col-md-6">
@@ -261,7 +294,7 @@
                       FROM Request
                       WHERE pid=:pid AND status='open'
                       ";
-                    $query_params = array( 
+                    $query_params = array(
                       ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
                      ); 
                     try{
