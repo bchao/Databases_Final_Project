@@ -104,9 +104,9 @@
             </div>
 
             <div class="form-group">
-              <label name="date" for="date" class="col-sm-3 control-label">Date</label>
+              <label for="date" class="col-sm-3 control-label">Date</label>
               <div class="col-md-6">
-                <input multiple type="date" class="form-control" id="date">
+                <input name ="date" type="date" class="form-control" id="date">
               </div>
             </div>
 
@@ -126,7 +126,7 @@
               <div class="col-sm-10 col-md-6">
                 <select multiple class="form-control" id="time" name="time[]">
                     <option value="morning">Morning</option>
-                    <option value="afternooon">Afternoon</option>
+                    <option value="afternoon">Afternoon</option>
                     <option value="evening">Evening</option>
                     <option value="night">Night</option>
                 </select>

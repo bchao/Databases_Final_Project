@@ -33,7 +33,7 @@
 			WHERE time_slot_date=:date AND time_slot_time=:time
 		";
 		$query_params = array(
-			':date' => $mydate,
+			':date' => date('Y-m-d', strtotime($_POST['date'])),
 			':time' => $mytime
 		);		
 		try {
@@ -42,7 +42,7 @@
 		}
 		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-			$tsid = $stmt -> fetch();
+		$tsid = $stmt -> fetch();
 
 		$small=false;
 		$medium=false;
@@ -72,7 +72,6 @@
 			)
 		";
 		$query_params = array(
-			//':count' => $count,
 			':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8'),
 			':topid' => $mytopid,
 			':large' => $large,
@@ -106,8 +105,6 @@
 
 		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 	}
-
-
 
     header("Location: requestSuccess.php"); 
 ?>

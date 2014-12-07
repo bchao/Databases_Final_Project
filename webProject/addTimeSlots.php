@@ -2,7 +2,7 @@
  require("config.php");
 
  $date = '2014-12-06';
- $end_date = '2016-12-31';
+ $end_date = '2015-12-31';
 
  $times = array('morning', 'afternoon', 'evening', 'night');
  
