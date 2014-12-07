@@ -215,8 +215,8 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th>Topic</th>
                   <th>Meeting ID</th>
+                  <th>Topic</th>
                   <th>Time</th>
                 </tr>
               </thead>
@@ -244,8 +244,8 @@
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
-                    echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['mid'] . '</td>';
+                    echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
                     $num++;
                   }
@@ -332,7 +332,7 @@
                     echo '<tr>';
                     echo '<td>' . $row['rid'] . '</td>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . date("h:i:s A \o\n l, F jS",$row['time']) . '</td>';
+                    echo '<td>' . date("h:i:s A \o\\n l, F jS",$row['time']) . '</td>';
                     $num++;
                   }
                 ?>
