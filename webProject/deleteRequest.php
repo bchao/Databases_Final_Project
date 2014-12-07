@@ -3,7 +3,10 @@
 
 	$query = "
 			DELETE FROM Request
-			WHERE rid = :rid
+			WHERE rid = :rid;
+
+			DELETE FROM RequestTimes
+			WHERE rid = :rid;
 		";
 		$query_params = array(
 			':rid' => $_POST['rid']
