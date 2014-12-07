@@ -252,7 +252,7 @@
           <hr>
             <form class="form-inline" method="post" action="deleteRequest.php" role="form">
               <div class="form-group">
-              <label for="request" class="col-sm-3 control-label">Delete Request</label>
+              <label for="request" class="col-sm-6 control-label">Delete Request</label>
               <div class="col-sm-10 col-md-6">
                 <select class="form-control" id="request" name="request">
                   <?php
