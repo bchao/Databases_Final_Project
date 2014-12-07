@@ -8,6 +8,7 @@
                 first_name,
                 last_name,
                 password,
+                salt,
                 email
             FROM Person
             WHERE
@@ -26,12 +27,23 @@
         $row = $stmt->fetch(); 
 
         if($row){ 
-            if($_POST['password'] === $row['password']) {
-              $login_ok = true;
-            }
+            $check_password = hash('sha256', $_POST['password'] . $row['salt']); 
+            for($round = 0; $round < 65536; $round++){
+                $check_password = hash('sha256', $check_password . $row['salt']);
+            } 
+            if($check_password === $row['password']){
+                $login_ok = true;
+            } 
         } 
 
+        // if($row){ 
+        //     if($_POST['password'] === $row['password']) {
+        //       $login_ok = true;
+        //     }
+        // } 
+
         if($login_ok){ 
+            unset($row['salt']);
             unset($row['password']); 
             $_SESSION['Person'] = $row;  
             header("Location: hub.php"); 
