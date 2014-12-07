@@ -250,7 +250,7 @@
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
           <hr>
-            <form class="form-horizontal" method="post" action="deleteRequest.php" role="form">
+            <form class="form-inline" method="post" action="deleteRequest.php" role="form">
               <div class="form-group">
               <label for="request" class="col-sm-3 control-label">Delete Request</label>
               <div class="col-sm-10 col-md-6">
