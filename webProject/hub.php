@@ -82,7 +82,6 @@
           <hr>
                       
           <form class="form-horizontal" method="post" action="setRid.php" role="form">
-
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Topic</label>
               <div class="col-sm-10 col-md-6">
@@ -197,6 +196,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
+                  <th>Meeting ID</th>
                   <th>Topic</th>
                   <th>Time</th>
                 </tr>
@@ -205,7 +205,7 @@
               <tbody>
                 <?php
                  $query = "
-                  SELECT name, time_slot_date, time_slot_time
+                  SELECT name, Meeting.mid AS mid, time_slot_date, time_slot_time
                   FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
                   WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
                     AND meeting_time = TimeSlot.tsid AND time_slot_date >= NOW()
@@ -225,6 +225,7 @@
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
                     echo '<tr>';
+                    echo '<td>' . $row['mid'] . '</td>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
                     $num++;
@@ -249,10 +250,38 @@
         <div role="tabpanel" class="tab-pane" id="pendingrequests">
           <h1>Pending Requests</h1>
           <hr>
+            <form class="form-horizontal" method="post" action="deleteRequest.php" role="form">
+              <div class="form-group">
+              <label for="request" class="col-sm-3 control-label">Delete Request</label>
+              <div class="col-sm-10 col-md-6">
+                <select class="form-control" id="request" name="request">
+                  <?php
+                    $query = "
+                      SELECT *
+                      FROM Request
+                      WHERE pid=:pid AND status='open'
+                      ";
+                    $query_params = array( 
+                      ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
+                     ); 
+                    try{
+                      $stmt = $db->prepare($query);
+                      $result = $stmt->execute($query_params);
+                    }
+                    catch(PDOException $ex) {die("Failed to get Requests: " . $ex->getMessage()); }
 
+                    while($row = $stmt -> fetch()) {
+                      echo "<option>$row[rid]</option>";
+                    }
+                  ?>
+                </select>
+              </div>
+            </div>
+            </form>
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
+                  <td>Request ID</td>
                   <td>Topic</td>
                   <td>Time at Request</td>
                 </tr>
@@ -261,7 +290,7 @@
               <tbody>
                 <?php
                   $query = "
-                    SELECT name, time
+                    SELECT name, rid, time
                     FROM Request, Topic
                     WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
                     "; 
@@ -282,8 +311,9 @@
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<tr>';
+                    echo '<td>' . $row['rid'] . '</td>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time'] . '</td>';
+                    echo '<td>' . date("h:i:s A \o\\n l, F jS",$row['time']) . '</td>';
                     $num++;
                   }
                 ?>
@@ -304,7 +334,7 @@
           </hr>
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
-          <h1>Past Requests</h1>
+          <h1>Past Meetings</h1>
           <hr>
 
             <table class="table table-striped">
