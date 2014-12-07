@@ -200,7 +200,7 @@
                 <select class="form-control" id="mid" name="mid">
                   <?php
                     $query = "
-                      SELECT mid
+                      SELECT *
                       FROM Meeting, PersonAttendingMeeting
                       WHERE pid=:pid AND Meeting.mid = PersonAttendingMeeting.mid
                       ";
