@@ -277,6 +277,11 @@
                 </select>
               </div>
             </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Delete</button>
+              </div>
+            </div>
             </form>
             <table class="table table-striped table-hover">
               <thead>
