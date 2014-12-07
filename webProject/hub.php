@@ -81,7 +81,7 @@
           <h1>Create New Request</h1>
           <hr>
                       
-          <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
+          <form class="form-horizontal" method="post" action="setRid.php" role="form">
 
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Topic</label>
