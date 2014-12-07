@@ -82,7 +82,6 @@
           <hr>
                       
           <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
-
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Topic</label>
               <div class="col-sm-10 col-md-6">
@@ -277,16 +276,16 @@
                 <select class="form-control" id="request" name="request">
                   <?php
                     $query = "
-                      SELECT rid
+                      SELECT *
                       FROM Request
-                      WHERE pid=:pid AND status = 'open'
+                      WHERE pid=:pid AND status='open'
                       ";
                     $query_params = array( 
                       ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
                      ); 
                     try{
                       $stmt = $db->prepare($query);
-                      $result = $stmt->execute();
+                      $result = $stmt->execute($query_params);
                     }
                     catch(PDOException $ex) {die("Failed to get Requests: " . $ex->getMessage()); }
 
