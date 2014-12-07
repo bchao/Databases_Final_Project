@@ -1,14 +1,13 @@
 <?php
 	require("config.php");
 
-	$mytopic = $_POST['topic'];
 	$query = "
 		SELECT topid 
 		FROM Topic 
 		WHERE name = :name
 	";
 	$query_params = array(
-		':name' => $mytopic
+		':name' => $_SESSION['currReq']['topic']
 	);
 
 	try{
@@ -44,7 +43,9 @@
 
 		$tsid = $stmt -> fetch();
 
-		$groupArr = $_POST['grouppref'];
+
+
+		$groupArr = $_SESSION['currReq']['grouppref'];
 		$small=false;
 		$medium=false;
 		$large=false;
@@ -85,15 +86,13 @@
 		}
 		catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
 
-		$stmt = $db->query('SELECT rid FROM Request ORDER BY rid DESC LIMIT 1');
-		$rid = $stmt->fetch();
-
 		$query = "
 			INSERT INTO RequestTimes 
 			VALUE(:rid, :tsid)
 		";
 		$query_params = array(
-			':rid' => $rid['rid'],
+			// ':rid' => $rid['rid'],
+			':rid' => $_SESSION['currReq']['rid'],
 			':tsid' => $tsid['tsid']
 		);
 

@@ -66,18 +66,44 @@
       <h4>Navigation</h4>
       <!-- Nav tabs -->
       <ul class="nav nav-pills nav-stacked" role="tablist">
-        <li role="presentation" class="active"><a href="#createrequest" aria-controls="requeststatus" role="tab" data-toggle="tab">Request Status</a></li>
+        <li role="presentation" class="active"><a href="#createrequest" aria-controls="requeststatus" role="tab" data-toggle="tab">Create</a></li>
       </ul>
     </div>
 
     <div class="col-md-offset-4 block">
       <div class="tab-content">
         <div id="requeststatus" class="tab-pane active">
-          <h1>Request made!</h1>
+          <h1>Select a date and time to study <?php echo $_POST['rid'];?></h1>
           <hr>
-        </br >
-          <a class="btn btn-primary btn-lg btn-block" type="button" href="addDateTime.php">Add More</a>
-          <a class="btn btn-primary btn-lg btn-block" type="button" href="hub.php">Return Home</a>
+          <br>
+
+          <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
+            <div class="form-group">
+              <label for="date" class="col-sm-3 control-label">Date</label>
+              <div class="col-md-6">
+                <input name ="date" type="date" class="form-control" id="date">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="topic" class="col-sm-3 control-label">Time</label>
+              <div class="col-sm-10 col-md-6">
+                <select multiple class="form-control" id="time" name="time[]">
+                    <option value="morning">Morning</option>
+                    <option value="afternoon">Afternoon</option>
+                    <option value="evening">Evening</option>
+                    <option value="night">Night</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Submit</button>
+              </div>
+            </div>
+          </form>
+
         </div>
     </div>
   </div>

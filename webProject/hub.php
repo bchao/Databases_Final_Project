@@ -81,8 +81,7 @@
           <h1>Create New Request</h1>
           <hr>
                       
-          <form class="form-horizontal" method="post" action="storeRequest.php" role="form">
-
+          <form class="form-horizontal" method="post" action="setRid.php" role="form">
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Topic</label>
               <div class="col-sm-10 col-md-6">
@@ -104,31 +103,12 @@
             </div>
 
             <div class="form-group">
-              <label for="date" class="col-sm-3 control-label">Date</label>
-              <div class="col-md-6">
-                <input name ="date" type="date" class="form-control" id="date">
-              </div>
-            </div>
-
-            <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Group Preference</label>
-              <div class="col-sm-10 col-md-6">
+              <div class="col-sm-10 col-md-6"> 
                 <select multiple class="form-control" id="grouppref" name="grouppref[]">
                   <option value="Small">Small (2-3)</option>
                   <option value="Medium">Medium (4-6)</option>
                   <option value="Large">Large (7+)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="topic" class="col-sm-3 control-label">Time</label>
-              <div class="col-sm-10 col-md-6">
-                <select multiple class="form-control" id="time" name="time[]">
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
-                    <option value="night">Night</option>
                 </select>
               </div>
             </div>
@@ -277,16 +257,16 @@
                 <select class="form-control" id="request" name="request">
                   <?php
                     $query = "
-                      SELECT rid
-                      FROM Request, Topic
-                      WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
+                      SELECT *
+                      FROM Request
+                      WHERE pid=:pid AND status='open'
                       ";
                     $query_params = array( 
                       ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
                      ); 
                     try{
                       $stmt = $db->prepare($query);
-                      $result = $stmt->execute();
+                      $result = $stmt->execute($query_params);
                     }
                     catch(PDOException $ex) {die("Failed to get Requests: " . $ex->getMessage()); }
 
@@ -295,6 +275,11 @@
                     }
                   ?>
                 </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-sm-offset-3 col-sm-10">
+                <button type="submit" class="btn btn-default">Delete</button>
               </div>
             </div>
             </form>
