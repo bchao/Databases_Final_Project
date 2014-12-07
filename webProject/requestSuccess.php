@@ -76,6 +76,7 @@
           <h1>Request made!</h1>
           <hr>
         </br >
+          <a class="btn btn-primary btn-lg btn-block" type="button" href="addDateTime.php">Add More</a>
           <a class="btn btn-primary btn-lg btn-block" type="button" href="hub.php">Return Home</a>
         </div>
     </div>
