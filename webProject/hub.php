@@ -301,8 +301,8 @@
             <table class="table table-striped table-hover">
               <thead>
                 <tr class = "active">
-                  <td>Topic</td>
                   <td>Request ID</td>
+                  <td>Topic</td>
                   <td>Time at Request</td>
                 </tr>
               </thead>
@@ -331,9 +331,9 @@
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<tr>';
-                    echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['rid'] . '</td>';
-                    echo '<td>' . date("h:i:s A \on l, F js",$row['time']) . '</td>';
+                    echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . date("h:i:s A \o\n l, F jS",$row['time']) . '</td>';
                     $num++;
                   }
                 ?>
