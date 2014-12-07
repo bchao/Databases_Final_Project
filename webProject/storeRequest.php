@@ -44,18 +44,17 @@
 
 		$tsid = $stmt -> fetch();
 
+		$groupArr = $_POST['grouppref'];
 		$small=false;
 		$medium=false;
 		$large=false;
 
-		if(strcmp($_POST['grouppref'],"Small") == 0) {
-			$small=true;
-		}
-		if(strcmp($_POST['grouppref'],"Medium") == 0) {
-			$medium=true;
-		}
-		if(strcmp($_POST['grouppref'],"Large") == 0) {
-			$large=true;
+
+		for($index = 0; $index < count($groupArr); $index++) {
+			$gSize = $groupArr[$index];
+			if(strcmp($gSize, "Small") == 0) {$small = true;}
+			if(strcmp($gSize, "Medium") == 0) {$medium = true;}
+			if(strcmp($gSize, "Large") == 0) {$large = true;}
 		}
 
 		$query = "

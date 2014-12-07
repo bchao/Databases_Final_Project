@@ -113,7 +113,7 @@
             <div class="form-group">
               <label for="topic" class="col-sm-3 control-label">Group Preference</label>
               <div class="col-sm-10 col-md-6">
-                <select class="form-control" id="grouppref" name="grouppref">
+                <select multiple class="form-control" id="grouppref" name="grouppref[]">
                   <option value="Small">Small (2-3)</option>
                   <option value="Medium">Medium (4-6)</option>
                   <option value="Large">Large (7+)</option>
