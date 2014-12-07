@@ -217,6 +217,7 @@
               <thead>
                 <tr>
                   <th>Topic</th>
+                  <th>Meeting ID</th>
                   <th>Time</th>
                 </tr>
               </thead>
@@ -224,7 +225,7 @@
               <tbody>
                 <?php
                  $query = "
-                  SELECT name, time_slot_date, time_slot_time
+                  SELECT name, Meeting.mid AS mid, time_slot_date, time_slot_time
                   FROM Meeting, PersonAttendingMeeting, Topic, TimeSlot
                   WHERE pid = :pid AND Meeting.mid = PersonAttendingMeeting.mid AND Meeting.topic = Topic.topid
                     AND meeting_time = TimeSlot.tsid AND time_slot_date >= NOW()
@@ -245,6 +246,7 @@
                     // Print out the contents of the entry 
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
+                    echo '<td>' . $row['mid'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
                     $num++;
                   }
@@ -273,6 +275,7 @@
               <thead>
                 <tr class = "active">
                   <td>Topic</td>
+                  <td>Request ID</td>
                   <td>Time at Request</td>
                 </tr>
               </thead>
@@ -280,7 +283,7 @@
               <tbody>
                 <?php
                   $query = "
-                    SELECT name, time
+                    SELECT name, rid, time
                     FROM Request, Topic
                     WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
                     "; 
@@ -302,7 +305,8 @@
                     echo '<tr>';
                     echo '<tr>';
                     echo '<td>' . $row['name'] . '</td>';
-                    echo '<td>' . $row['time'] . '</td>';
+                    echo '<td>' . $row['rid'] . '</td>';
+                    echo '<td>' . date("h:i:s A \on l, F js",$row['time']) . '</td>';
                     $num++;
                   }
                 ?>
@@ -323,7 +327,7 @@
           </hr>
         </div>
         <div role="tabpanel" class="tab-pane" id="pastrequests">
-          <h1>Past Requests</h1>
+          <h1>Past Meetings</h1>
           <hr>
 
             <table class="table table-striped">
