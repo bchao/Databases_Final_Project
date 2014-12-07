@@ -23,9 +23,9 @@
 	$mydate = $_POST['date'];
 	$curtime = time();
 
-	$timeArr[] = $_POST['time[]'];
+	$timeArr = $_POST['time'];
 
-	for($index = 0; $index < count($timeArr[]); $index++) {
+	for($index = 0; $index < count($timeArr); $index++) {
 		$mytime = $timeArr[$index];
 		$query = "
 			SELECT tsid
