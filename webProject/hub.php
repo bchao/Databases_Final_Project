@@ -278,8 +278,8 @@
                   <?php
                     $query = "
                       SELECT rid
-                      FROM Request, Topic
-                      WHERE pid=:pid AND Request.topid = Topic.topid AND status = 'open'
+                      FROM Request
+                      WHERE pid=:pid AND status = 'open'
                       ";
                     $query_params = array( 
                       ':pid' => htmlentities($_SESSION['Person']['pid'], ENT_QUOTES, 'UTF-8')
