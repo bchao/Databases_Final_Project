@@ -123,7 +123,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND small_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
-									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+									AND tsid NOT IN (SELECT meeting_time FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
@@ -137,7 +137,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND medium_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
-									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+									AND tsid NOT IN (SELECT meeting_time FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
@@ -151,7 +151,7 @@
 								SELECT pid 
 								FROM Request, RequestTimes 
 								WHERE (topid = :topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = :tsid AND status = 'open'
-									AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+									AND tsid NOT IN (SELECT meeting_time FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 							";
 							try{
 								$people_query = $db->prepare($query);
