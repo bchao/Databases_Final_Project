@@ -224,10 +224,34 @@
 
                   while ($row = $stmt -> fetch()) {
                     // Print out the contents of the entry 
-                    echo '<tr>';
+                    echo '<tr data-toggle="collapse" data-target="#row' . $num . '" class="accordion-toggle">';
                     echo '<td>' . $row['mid'] . '</td>';
                     echo '<td>' . $row['name'] . '</td>';
                     echo '<td>' . $row['time_slot_date'] . '  ' . $row['time_slot_time'] . '</td>';
+                    echo '</tr>';
+
+                    echo '<tr>';
+                    echo '<td class="hiddenRow"><div class="accordian-body collapse" id = "row' . $num . '">';
+
+                    $pquery = "
+                    SELECT first_name, last_name, email
+                    FROM Person, PersonAttendingMeeting
+                    WHERE Person.pid = PersonAttendingMeeting.pid AND mid = :mid
+                    ";
+                    $pquery_params = array(':mid' => $row['mid']);
+
+                    try {
+                      $pstmt = $db->prepare($pquery);
+                      $presult = $pstmt -> execute($pquery_params);
+                    }
+                    catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
+
+                    while ($prow = $pstmt -> fetch()) {
+                      echo $prow['last_name'] . ', ' . $prow['first_name'] . ': ' . $prow['email'];
+                      echo '<br>';
+                    }
+
+                    echo '</tr>';
                     $num++;
                   }
                 ?>
