@@ -330,8 +330,8 @@
 			$email = $email_row['email'];
 
 
-			//mail($email, $subject, $message, $headers);
-			mail('brandonchao3@gmail.com', $subject, $message, $headers);
+			mail($email, $subject, $message, $headers);
+			//mail('brandonchao3@gmail.com', $subject, $message, $headers);
 
 
 			$query = "
