@@ -60,20 +60,20 @@ WHERE Meeting.mid = PersonAttendingMeeting.mid;
 CREATE VIEW LargeRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND large_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+WHERE (Request.rid = RequestTimes.rid AND large_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT meeting_time AS tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 GROUP BY topid, tsid
 ORDER BY num_people DESC;
 
 CREATE VIEW MediumRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND medium_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+WHERE (Request.rid = RequestTimes.rid AND medium_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT meeting_time AS tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 GROUP BY topid, tsid
 ORDER BY num_people DESC;
 
 CREATE VIEW SmallRequestedTimeSlots AS
 SELECT topid, tsid, COUNT(*) AS num_people
 FROM Request, RequestTimes
-WHERE (Request.rid = RequestTimes.rid AND small_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
+WHERE (Request.rid = RequestTimes.rid AND small_group_ok = 1 AND status = 'open' AND tsid NOT IN (SELECT meeting_time AS tsid FROM PersonBusyDuringTimeSlot WHERE PersonBusyDuringTimeSlot.pid = Request.pid))
 GROUP BY topid, tsid
 ORDER BY num_people DESC;
