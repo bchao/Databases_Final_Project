@@ -52,7 +52,7 @@
 
 			switch($group_size){
 				case 'small':
-					echo "case small\n";
+					// echo "case small\n";
 
 					$query = "
 						SELECT * 
@@ -69,7 +69,7 @@
 					// $top_time_slot = mysql_query("SELECT * FROM SmallRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				case 'medium':
-					echo "case medium\n";
+					// echo "case medium\n";
 
 					$query = "
 						SELECT * 
@@ -85,7 +85,7 @@
 					// $top_time_slot = mysql_query("SELECT * FROM MediumRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				case 'large':
-					echo "case large\n";
+					// echo "case large\n";
 
 					$query = "
 						SELECT * 
@@ -101,7 +101,7 @@
 					// $top_time_slot = mysql_query("SELECT * FROM LargeRequestedTimeSlots WHERE topid = $topic ORDER BY num_people DESC;");
 					break;
 				default:
-					echo "error here\n";
+					// echo "error here\n";
 			}
 			// echo 'stmt: ' . $stmt -> rowCount() . ' ';
 			//echo 'topic: ' . print_r($topic) . ' ';
@@ -161,7 +161,7 @@
 							//$people_query = mysql_query("SELECT pid FROM Request, RequestTimes WHERE (topid = $topic AND large_group_ok = TRUE AND Request.rid = RequestTimes.rid AND tsid = $tsid AND status = 'open');");	
 							break;
 						default:
-							echo "error\n";
+							// echo "error\n";
 					}
 					$people = array();
 					$count = 0;
