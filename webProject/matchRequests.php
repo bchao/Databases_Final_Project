@@ -52,7 +52,7 @@
 
 			switch($group_size){
 				case 'small':
-					echo "case small\n";
+					// echo "case small\n";
 
 					$query = "
 						SELECT * 
